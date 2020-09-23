@@ -22,7 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="595d8817-a8c4-4745-b3a4-10b119469b0e" name="Default Changelist" comment="X commit 1 task" />
+    <list default="true" id="595d8817-a8c4-4745-b3a4-10b119469b0e" name="Default Changelist" comment="Y commit 3 task">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +83,21 @@
       <option name="project" value="LOCAL" />
       <updated>1600881357714</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="X commit 2 task">
+      <created>1600881771952</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1600881771952</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Y commit 3 task">
+      <created>1600882259878</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1600882259878</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +115,8 @@
     <MESSAGE value="normal repository" />
     <MESSAGE value="XY commit 1 task" />
     <MESSAGE value="X commit 1 task" />
-    <option name="LAST_COMMIT_MESSAGE" value="X commit 1 task" />
+    <MESSAGE value="X commit 2 task" />
+    <MESSAGE value="Y commit 3 task" />
+    <option name="LAST_COMMIT_MESSAGE" value="Y commit 3 task" />
   </component>
 </project>
