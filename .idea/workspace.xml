@@ -22,10 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="595d8817-a8c4-4745-b3a4-10b119469b0e" name="Default Changelist" comment="normal repository">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/LaboratoryWork2/functions/MathFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/LaboratoryWork2/Clase.java" beforeDir="false" />
+    <list default="true" id="595d8817-a8c4-4745-b3a4-10b119469b0e" name="Default Changelist" comment="XY commit 1 task">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/ssau/tk/LaboratoryWork2/functions/IdentityFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +70,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600875580469</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="XY commit 1 task">
+      <created>1600879710591</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1600879710591</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -87,6 +93,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="normal repository" />
-    <option name="LAST_COMMIT_MESSAGE" value="normal repository" />
+    <MESSAGE value="XY commit 1 task" />
+    <option name="LAST_COMMIT_MESSAGE" value="XY commit 1 task" />
   </component>
 </project>
