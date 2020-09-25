@@ -1,8 +1,8 @@
 package ru.ssau.tk.LaboratoryWork2.functions;
 
 public class CompositeFunction implements MathFunction {
-    private final MathFunction firstFunction;
-    private final MathFunction secondFunction;
+    private final MathFunction firstFunction;//создает константные поля
+    private final MathFunction secondFunction;//создает константные поля
 
     public CompositeFunction(MathFunction firstFunction, MathFunction secondFunction) {
         this.firstFunction = firstFunction;
@@ -10,6 +10,6 @@ public class CompositeFunction implements MathFunction {
     }
 
     public double apply(double x) {
-        return secondFunction.apply(firstFunction.apply(x));
+        return secondFunction.apply(firstFunction.apply(x));//сложная функция
     }
 }
