@@ -10,6 +10,7 @@ public class SinFunctionTest {
     public void testApply() {
         SinFunction testFunction = new SinFunction();
         assertEquals(testFunction.apply(0), 0,0);
+        assertEquals(testFunction.apply(-2), -0.9,0);
         assertNotEquals(testFunction.apply(2.0), 1,0);
         assertNotEquals(testFunction.apply(2.0), 4.0,0);
         assertNotEquals(testFunction.apply(12), 144,0);

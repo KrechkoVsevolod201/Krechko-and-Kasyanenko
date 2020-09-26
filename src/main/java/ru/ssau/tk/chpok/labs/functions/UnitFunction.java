@@ -5,4 +5,3 @@ public class UnitFunction extends ConstantFunction {
         super(1);
     }
 }
-

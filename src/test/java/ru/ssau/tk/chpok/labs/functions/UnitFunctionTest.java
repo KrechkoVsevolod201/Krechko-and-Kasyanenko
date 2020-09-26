@@ -15,6 +15,7 @@ public class UnitFunctionTest {
     @Test
     public void testApply() {
         assertEquals(testFunction.getConstant(), 1.0, 0);
+        assertNotEquals(testFunction.getConstant(), 10.0, 0);
 
     }
 }

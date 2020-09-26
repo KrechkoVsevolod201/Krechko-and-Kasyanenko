@@ -8,7 +8,7 @@ public class SqrFunctionTest {
 
     @Test
     public void testApply() {
-        SqrFunction testFunction = new SqrFunction();
+        MathFunction testFunction = new SqrFunction();
         assertEquals(testFunction.apply(1.0), 1,0);
         assertNotEquals(testFunction.apply(2.0), 1,0);
         assertEquals(testFunction.apply(2.0), 4.0,0);

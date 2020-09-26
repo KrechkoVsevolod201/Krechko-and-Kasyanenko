@@ -8,6 +8,11 @@ public class ConstantFunctionTest {
 
     @Test
     public void testGetConstant() {
+        ConstantFunction testFunction = new ConstantFunction(69);
+        assertEquals(testFunction.getConstant(), 69,0);
+        assertEquals(testFunction.getConstant(), 69,0);
+        assertNotEquals(testFunction.getConstant(), 96,0);
+        assertNotEquals(testFunction.getConstant(), 169,0);
     }
 
     @Test

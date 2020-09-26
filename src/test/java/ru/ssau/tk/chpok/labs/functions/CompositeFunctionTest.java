@@ -8,11 +8,11 @@ public class CompositeFunctionTest {
 
     @Test
     public void testApply() {
-        MathFunction firstFunction = new IdentityFunction();
-        MathFunction secondFunction = new IdentityFunction();
+        MathFunction firstFunction = new SqrFunction();
+        MathFunction secondFunction = new SqrtFunction();
         CompositeFunction testFunction = new CompositeFunction(firstFunction, secondFunction);
         assertEquals(testFunction.apply(0), 0,0);
-        assertEquals(testFunction.apply(0.785), 1.0,0);
+        assertEquals(testFunction.apply(1.0), 1.0,0);
         assertNotEquals(testFunction.apply(2.0), 69,0);
         assertNotEquals(testFunction.apply(12), 144,0);
     }
