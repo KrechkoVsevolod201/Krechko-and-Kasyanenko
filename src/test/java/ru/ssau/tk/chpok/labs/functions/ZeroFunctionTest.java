@@ -17,7 +17,6 @@ public class ZeroFunctionTest {
     @Test
     public void testApply() {
         assertEquals(testFunction.getConstant(), 0.0, 0);
-
     }
 
 }

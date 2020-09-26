@@ -11,7 +11,7 @@ public class SqrFunctionTest {
         MathFunction testFunction = new SqrFunction();
         assertEquals(testFunction.apply(1.0), 1,0);
         assertNotEquals(testFunction.apply(2.0), 1,0);
-        assertEquals(testFunction.apply(2.0), 4.0,0);
+        assertEquals(testFunction.apply(-2.0), 4.0,0);
         assertEquals(testFunction.apply(12), 144,0);
     }
 }

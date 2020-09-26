@@ -13,6 +13,5 @@ public class IdentityFunctionTest {
         assertNotEquals(testFunction.apply(2.0), 1,0);
         assertEquals(testFunction.apply(128.365), 128.365,0);
         assertEquals(testFunction.apply(-666.999), -666.999,0);
-
     }
 }

@@ -16,6 +16,5 @@ public class MathFunctionTest {
             assertEquals(testAndThen.andThen(unit).apply(10), 1.0,0);
             assertEquals(testAndThen.andThen(sqrX).apply(2), 2,0);
             assertEquals(testAndThen.andThen(sqrtX).apply(0), 0,0);
-
     }
 }
