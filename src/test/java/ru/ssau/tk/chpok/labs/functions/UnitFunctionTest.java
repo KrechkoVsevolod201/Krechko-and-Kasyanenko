@@ -8,13 +8,13 @@ public class UnitFunctionTest {
     UnitFunction testFunction = new UnitFunction();
     @Test
     public void testGetConstant(){
-        assertEquals(testFunction.apply(0), 5.0,0);
-        assertEquals(testFunction.apply(-8876542), 5.0,0);
-        assertEquals(testFunction.apply(742), 5.0,0);
+        assertEquals(testFunction.apply(0), 1.0,0);
+        assertEquals(testFunction.apply(-8876542), 1.0,0);
+        assertEquals(testFunction.apply(742), 1.0,0);
     }
     @Test
     public void testApply() {
-        assertEquals(testFunction.getConstant(), 5.0, 0);
+        assertEquals(testFunction.getConstant(), 1.0, 0);
 
     }
 }
