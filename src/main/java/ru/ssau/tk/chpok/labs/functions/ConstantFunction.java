@@ -7,7 +7,7 @@ public class ConstantFunction implements MathFunction {
         this.constant = constant;
     }
 
-    @Override//переопределение метода базового класса.
+    @Override
     public double apply(double x) {
         return constant;
     }
