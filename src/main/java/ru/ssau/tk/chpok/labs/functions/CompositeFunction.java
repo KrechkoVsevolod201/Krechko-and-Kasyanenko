@@ -1,4 +1,4 @@
-package ru.ssau.tk.LaboratoryWork2.functions;
+package ru.ssau.tk.chpok.labs.functions;
 
 public class CompositeFunction implements MathFunction {
     private final MathFunction firstFunction;//создает константные поля

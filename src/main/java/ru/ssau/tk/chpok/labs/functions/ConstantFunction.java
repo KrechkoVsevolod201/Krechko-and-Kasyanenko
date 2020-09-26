@@ -1,4 +1,4 @@
-package ru.ssau.tk.LaboratoryWork2.functions;
+package ru.ssau.tk.chpok.labs.functions;
 
 public class ConstantFunction implements MathFunction {
     private final double constant;//инициализация переменной
