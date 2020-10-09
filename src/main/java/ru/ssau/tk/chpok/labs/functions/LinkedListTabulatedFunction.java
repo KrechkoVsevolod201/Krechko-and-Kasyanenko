@@ -3,19 +3,13 @@ package ru.ssau.tk.chpok.labs.functions;
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
-    private int count;
+    protected int count;
 
     private static class Node {
-        public Node next;
-        public Node prev;
-        public double x;
-        public double y;
-    }
-
-    private void IsIndexOutOfBounds(int index) {
-        if (index < 0 || index > count - 1) {
-            throw new IllegalArgumentException("Index is out of bounds");
-        }
+        Node next;
+        Node prev;
+        double x;
+        double y;
     }
 
     private void addNode(double x, double y) {
@@ -38,11 +32,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length < 2) {
-            throw new IllegalArgumentException("Error array size is smaller than 2");
-        } else if (yValues.length < 2) {
-            throw new IllegalArgumentException("Error array size is smaller than 2");
-        }
         this.count = xValues.length;
         for (int i = 0; i < count; i++) {
             this.addNode(xValues[i], yValues[i]);
@@ -50,20 +39,17 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        if (count < 2) {
-            throw new IllegalArgumentException("Error array size is smaller than 2");
-        }
-        double addVar = xFrom;
+        double auxiliaryVar = xFrom;
         double step = (xTo - xFrom) / (count - 1);
         for (int i = 0; i < count; i++) {
-            this.addNode(addVar, source.apply(addVar));
-            addVar += step;
+            this.addNode(auxiliaryVar, source.apply(auxiliaryVar));
+            auxiliaryVar += step;
         }
     }
 
     private Node getNode(int index) {
         Node node;
-        IsIndexOutOfBounds(index);
+
         if (index > (count / 2)) {
             node = head.prev;
             for (int i = count - 1; i > 0; i--) {
@@ -88,19 +74,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
-        IsIndexOutOfBounds(index);
         return getNode(index).x;
     }
 
     @Override
     public double getY(int index) {
-        IsIndexOutOfBounds(index);
         return getNode(index).y;
     }
 
     @Override
     public void setY(int index, double value) {
-        IsIndexOutOfBounds(index);
         getNode(index).y = value;
     }
 
@@ -121,15 +104,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfX(double x) {
-        Node addVar;
-        addVar = head;
+        Node auxiliaryVar;
+        auxiliaryVar = head;
         for (int i = 0; i < count; i++) {
-            if (!Double.isNaN(addVar.x) && (addVar.x == x)) {
-                return i;
-            } else if (Double.isNaN(addVar.x) && Double.isNaN(x)) {
+            if (auxiliaryVar.x == x) {
                 return i;
             } else {
-                addVar = addVar.next;
+                auxiliaryVar = auxiliaryVar.next;
             }
         }
         return -1;
@@ -137,15 +118,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfY(double y) {
-        Node addVar;
-        addVar = head;
+        Node auxiliaryVar;
+        auxiliaryVar = head;
         for (int i = 0; i < count; i++) {
-            if (!Double.isNaN(addVar.y) && (addVar.y == y)) {
-                return i;
-            } else if (Double.isNaN(addVar.y) && Double.isNaN(y)) {
+            if (auxiliaryVar.y == y) {
                 return i;
             } else {
-                addVar = addVar.next;
+                auxiliaryVar = auxiliaryVar.next;
             }
         }
         return -1;
@@ -153,22 +132,23 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected int floorIndexOfX(double x) {
-        Node addVar;
-        addVar = head;
+        Node auxiliaryVar;
+        auxiliaryVar = head;
         int flag = 0;
         for (int i = 0; i < count; i++) {
-            if (addVar.x < x) {
+            if (auxiliaryVar.x < x) {
                 flag += 1;
-                addVar = addVar.next;
+                auxiliaryVar = auxiliaryVar.next;
+            }
+            if (flag == 0) {
+                return 0;
+            } else if (flag == count) {
+                return count;
+            } else {
+                return flag;
             }
         }
-        if (flag == 0) {
-            return 0;
-        } else if (flag == count) {
-            return count;
-        } else {
-            return flag;
-        }
+        return 0;
     }
 
     @Override
