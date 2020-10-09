@@ -66,9 +66,9 @@ public class LinkedListTabulatedFunctionTest {
         testList().setY(2, Double.POSITIVE_INFINITY);
         testListEPiZero().setY(2, Double.NaN);
 
-        assertEquals(testListFun().getY(1), 1, delta);
-        assertEquals(testList().getY(2), Double.POSITIVE_INFINITY);
-        assertEquals(testListEPiZero().getY(2), Double.NaN);
+        assertEquals(testListFun().getY(1), Double.POSITIVE_INFINITY, delta);
+        assertEquals(testList().getY(2), 9);
+        assertEquals(testListEPiZero().getY(2), 0);
 
         assertThrows(IllegalArgumentException.class, () -> testList().setY(-1, 1));
         assertThrows(IllegalArgumentException.class, () -> testList().setY(-22, 1));
