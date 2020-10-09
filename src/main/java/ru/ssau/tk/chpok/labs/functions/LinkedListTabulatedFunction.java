@@ -5,11 +5,20 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private int count;
 
-    private static class Node {
-        Node next;
-        Node prev;
-        double x;
-        double y;
+    public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        this.count = xValues.length;
+        for (int i = 0; i < count; i++) {
+            this.addNode(xValues[i], yValues[i]);
+        }
+    }
+
+    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        double auxiliaryVar = xFrom;
+        double step = (xTo - xFrom) / (count - 1);
+        for (int i = 0; i < count; i++) {
+            this.addNode(auxiliaryVar, source.apply(auxiliaryVar));
+            auxiliaryVar += step;
+        }
     }
 
     private void addNode(double x, double y) {
@@ -29,22 +38,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             head.prev = newNode;
         }
 
-    }
-
-    public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        this.count = xValues.length;
-        for (int i = 0; i < count; i++) {
-            this.addNode(xValues[i], yValues[i]);
-        }
-    }
-
-    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        double auxiliaryVar = xFrom;
-        double step = (xTo - xFrom) / (count - 1);
-        for (int i = 0; i < count; i++) {
-            this.addNode(auxiliaryVar, source.apply(auxiliaryVar));
-            auxiliaryVar += step;
-        }
     }
 
     private Node getNode(int index) {
@@ -170,5 +163,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         Node floor = getNode(floorIndex);
         Node ceiling = floor.next;
         return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
+    }
+
+    private static class Node {
+        private Node next;
+        private Node prev;
+        private double x;
+        private double y;
     }
 }
