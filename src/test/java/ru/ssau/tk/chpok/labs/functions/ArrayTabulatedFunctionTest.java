@@ -7,7 +7,7 @@ import static org.testng.Assert.*;
 class AbstractTabulatedFunctionTest {
     MockTabulatedFunction newMock = new MockTabulatedFunction();
     private static double delta = 0.001;
-    //expression of the extrapolation is 3+x
+
     @Test
     public void testApply() {
         assertEquals(newMock.apply(1), 4, delta);//less than leftBound

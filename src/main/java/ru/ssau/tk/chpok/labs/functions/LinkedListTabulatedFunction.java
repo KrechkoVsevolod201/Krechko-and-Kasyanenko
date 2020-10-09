@@ -3,7 +3,7 @@ package ru.ssau.tk.chpok.labs.functions;
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
-    protected int count;
+    private int count;
 
     private static class Node {
         Node next;
@@ -107,7 +107,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         Node auxiliaryVar;
         auxiliaryVar = head;
         for (int i = 0; i < count; i++) {
-            if (auxiliaryVar.x == x) {
+            if (!Double.isNaN(auxiliaryVar.x) && (auxiliaryVar.x == x)) {
+                return i;
+            } else if (Double.isNaN(auxiliaryVar.x) && Double.isNaN(x)) {
                 return i;
             } else {
                 auxiliaryVar = auxiliaryVar.next;
@@ -121,7 +123,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         Node auxiliaryVar;
         auxiliaryVar = head;
         for (int i = 0; i < count; i++) {
-            if (auxiliaryVar.y == y) {
+            if (!Double.isNaN(auxiliaryVar.y) && (auxiliaryVar.y == y)) {
+                return i;
+            } else if (Double.isNaN(auxiliaryVar.y) && Double.isNaN(y)) {
                 return i;
             } else {
                 auxiliaryVar = auxiliaryVar.next;
