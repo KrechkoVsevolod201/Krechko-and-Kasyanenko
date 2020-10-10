@@ -14,15 +14,15 @@ public class LinkedListTabulatedFunctionTest {
 
     private static final double delta = 0.001;
 
-    LinkedListTabulatedFunction testList() {
+    public LinkedListTabulatedFunction testList() {
         return new LinkedListTabulatedFunction(xArr, yArr);
     }
 
-    LinkedListTabulatedFunction testListFun() {
+    public LinkedListTabulatedFunction testListFun() {
         return new LinkedListTabulatedFunction(funArr, funArr);
     }
 
-    LinkedListTabulatedFunction testListEPiZero() {
+    public LinkedListTabulatedFunction testListEPiZero() {
         return new LinkedListTabulatedFunction(ePiZero, ePiZero);
     }
 
