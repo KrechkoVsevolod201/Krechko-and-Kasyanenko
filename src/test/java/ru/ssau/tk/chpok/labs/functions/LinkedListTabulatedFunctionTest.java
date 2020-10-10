@@ -1,6 +1,5 @@
 package ru.ssau.tk.chpok.labs.functions;
 
-
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -25,6 +24,33 @@ public class LinkedListTabulatedFunctionTest {
 
     LinkedListTabulatedFunction testListEPiZero() {
         return new LinkedListTabulatedFunction(ePiZero, ePiZero);
+    }
+
+    @Test
+    public void testApply() {
+        final LinkedListTabulatedFunction testFunction = new LinkedListTabulatedFunction(xArr, yArr);
+        assertEquals(testFunction.apply(1.0), 1, delta);
+        assertNotEquals(testFunction.apply(5.0), 1, delta);
+        assertEquals(testFunction.apply(4.0), 14.0, delta);
+        assertEquals(testFunction.apply(12), 54, delta);
+    }
+
+    @Test
+    public void testApply1() {
+        final LinkedListTabulatedFunction testFunction = new LinkedListTabulatedFunction(funArr, funArr);
+        assertEquals(testFunction.apply(1.0), Double.NaN, delta);
+        assertNotEquals(testFunction.apply(5.0), 8, delta);
+        assertEquals(testFunction.apply(4.0), Double.NaN, delta);
+        assertEquals(testFunction.apply(12), Double.NaN, delta);
+    }
+
+    @Test
+    public void testApply2() {
+        final LinkedListTabulatedFunction testFunction = new LinkedListTabulatedFunction(ePiZero, ePiZero);
+        assertEquals(testFunction.apply(1.0), 1, delta);
+        assertNotEquals(testFunction.apply(5.0), 1, delta);
+        assertEquals(testFunction.apply(4.0), 4, delta);
+        assertEquals(testFunction.apply(12), 12, delta);
     }
 
     @Test
