@@ -127,15 +127,20 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testExtrapolateLeft() {
         assertEquals(testList().extrapolateLeft(1.9), 3.7, delta);
+        assertEquals(testList().extrapolateLeft(1), 1, delta);
+        assertEquals(testList().extrapolateLeft(-1), -5, delta);
     }
 
     @Test
     public void testExtrapolateRight() {
-        assertEquals(testList().extrapolateRight(1.9), 3.5, delta);
+        assertEquals(testList().extrapolateRight(1), -1, delta);
+        assertEquals(testList().extrapolateRight(-1), -11, delta);
+        assertEquals(testList().extrapolateRight(5), 19, delta);
     }
 
     @Test
     public void testInterpolate() {
         assertEquals(testList().interpolate(1.9, 0), 3.7, delta);
-    }
+        assertEquals(testList().interpolate(-1, 0), -5, delta);
+        assertEquals(testList().interpolate(1, 0), 1, delta);    }
 }
