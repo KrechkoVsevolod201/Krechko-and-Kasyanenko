@@ -5,10 +5,19 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
+    protected final double[] xArr = new double[]{1d, 2d, 3d};
+    protected final double[] yArr = new double[]{1d, 4d, 9d};
     private final double ACCURACY = 0.0001;
     private final MathFunction sqr = new SqrFunction();
     private final MathFunction IndetityFunction = new IdentityFunction();
-    private ArrayTabulatedFunction function(){return new ArrayTabulatedFunction(sqr, 2, 9, 8);}
+
+    private ArrayTabulatedFunction function() {
+        return new ArrayTabulatedFunction(sqr, 2, 9, 8);
+    }
+
+    private ArrayTabulatedFunction function1() {
+        return new ArrayTabulatedFunction(xArr, yArr);
+    }
 
     @Test
 
@@ -28,27 +37,59 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    public void testGetX1() {
+        assertEquals(function1().getX(0), 1);
+        assertEquals(function1().getX(1), 2, ACCURACY);
+        assertEquals(function1().getX(2), 3, ACCURACY);
+    }
+
+    @Test
     public void testGetY() {
-        assertEquals(function().getY(0),4);
+        assertEquals(function().getY(0), 4);
         assertEquals(function().getY(1), 9);
         assertEquals(function().getY(2), 16, ACCURACY);
+    }
+
+    @Test
+    public void testGetY1() {
+        assertEquals(function1().getY(0), 1);
+        assertEquals(function1().getY(1), 4);
+        assertEquals(function1().getY(2), 9, ACCURACY);
     }
 
     @Test
     public void testSetY() {
         function().setY(0, 4);
         function().setY(1, 9);
-        function().setY(2,16 );
+        function().setY(2, 16);
         assertEquals(function().getY(0), 4, ACCURACY);
         assertEquals(function().getY(1), 9, ACCURACY);
-        assertEquals(function().getY(2), 16 );
+        assertEquals(function().getY(2), 16);
+    }
+
+    @Test
+    public void testSetY1() {
+        function1().setY(0, 1);
+        function1().setY(1, 4);
+        function1().setY(2, 9);
+        assertEquals(function1().getY(0), 1, ACCURACY);
+        assertEquals(function1().getY(1), 4, ACCURACY);
+        assertEquals(function1().getY(2), 9);
     }
 
     @Test
     public void testIndexOfX() {
-        assertEquals(function().indexOfX(2),0);
+        assertEquals(function().indexOfX(2), 0);
         assertEquals(function().indexOfX(3), 1);
         assertEquals(function().indexOfX(4), 2);
+
+    }
+
+    @Test
+    public void testIndexOfX1() {
+        assertEquals(function1().indexOfX(2), 1);
+        assertEquals(function1().indexOfX(3), 2);
+        assertEquals(function1().indexOfX(4), -1);
 
     }
 
@@ -61,17 +102,38 @@ public class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    public void testIndexOfY1() {
+        assertEquals(function1().indexOfY(4), 1);
+        assertEquals(function1().indexOfY(9), 2);
+        assertEquals(function1().indexOfY(16), -1);
+
+    }
+
+    @Test
     public void testLeftBound() {
 
         assertEquals(function().leftBound(), 2, ACCURACY);
     }
 
     @Test
+    public void testLeftBound1() {
+
+        assertEquals(function1().leftBound(), 1, ACCURACY);
+    }
+
+    @Test
     public void testRightBound() {
-        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr,2, 4, 3);
+        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, 2, 4, 3);
         final ArrayTabulatedFunction anotherFunction = new ArrayTabulatedFunction(IndetityFunction, 3, 4, 1);
         assertEquals(anotherFunction.rightBound(), 3, ACCURACY);
         assertEquals(function().rightBound(), 9, ACCURACY);
+    }
+    @Test
+    public void testRightBound1() {
+        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, 2, 4, 3);
+        final ArrayTabulatedFunction anotherFunction = new ArrayTabulatedFunction(IndetityFunction, 3, 4, 1);
+        assertEquals(anotherFunction.rightBound(), 3, ACCURACY);
+        assertEquals(function1().rightBound(), 3, ACCURACY);
     }
 
     @Test
@@ -83,10 +145,15 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(function().floorIndexOfX(2), 0);
         assertEquals(function().floorIndexOfX(3), 0);
     }
-
-
-
-
+    @Test
+    public void testFloorIndexOfX1() {
+        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, 2, 4, 3);
+        assertEquals(testFunction.floorIndexOfX(2), 0);
+        assertEquals(testFunction.floorIndexOfX(3), 0);
+        assertEquals(testFunction.floorIndexOfX(4), 1);
+        assertEquals(function1().floorIndexOfX(2), 0);
+        assertEquals(function1().floorIndexOfX(3), 1);
+    }
     @Test
     public void testExtrapolateLeft() {
         final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(IndetityFunction, 2, 5, 4);
@@ -95,7 +162,14 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testFunction.extrapolateLeft(4), 4, ACCURACY);
         assertEquals(anotherFunction.extrapolateLeft(6), 24, ACCURACY);
     }
-
+    @Test
+    public void testExtrapolateLeft1() {
+        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(IndetityFunction, 2, 5, 4);
+        final ArrayTabulatedFunction anotherFunction = new ArrayTabulatedFunction(sqr, 2, 6, 5);
+        assertEquals(function1().extrapolateLeft(3), 7, ACCURACY);
+        assertEquals(testFunction.extrapolateLeft(4), 4, ACCURACY);
+        assertEquals(anotherFunction.extrapolateLeft(6), 24, ACCURACY);
+    }
     @Test
     public void testExtrapolateRight() {
         final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(IndetityFunction, 5, 8, 4);
@@ -104,14 +178,30 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testFunction.extrapolateRight(7), 7, ACCURACY);
         assertEquals(anotherFunction.extrapolateRight(6), 36, ACCURACY);
     }
-
+    @Test
+    public void testExtrapolateRight1() {
+        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(IndetityFunction, 5, 8, 4);
+        final ArrayTabulatedFunction anotherFunction = new ArrayTabulatedFunction(sqr, 5, 7, 3);
+        assertEquals(function1().extrapolateRight(4), 14, ACCURACY);
+        assertEquals(testFunction.extrapolateRight(7), 7, ACCURACY);
+        assertEquals(anotherFunction.extrapolateRight(6), 36, ACCURACY);
+    }
     @Test
     public void testInterpolate() {
         final ArrayTabulatedFunction anotherFunction = new ArrayTabulatedFunction(sqr, 7, 9, 3);
         final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, 5, 9, 5);
         assertEquals(anotherFunction.interpolate(7, anotherFunction.floorIndexOfX(7)), 49, ACCURACY);
         assertEquals(testFunction.interpolate(5, testFunction.floorIndexOfX(5)), 25, ACCURACY);
-        assertEquals(function().interpolate(3, function().floorIndexOfX( 3)), 9, ACCURACY);
+        assertEquals(function().interpolate(3, function().floorIndexOfX(3)), 9, ACCURACY);
+        assertEquals(testFunction.interpolate(6, testFunction.floorIndexOfX(6)), 36, ACCURACY);
+    }
+    @Test
+    public void testInterpolate1() {
+        final ArrayTabulatedFunction anotherFunction = new ArrayTabulatedFunction(sqr, 7, 9, 3);
+        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, 5, 9, 5);
+        assertEquals(anotherFunction.interpolate(7, anotherFunction.floorIndexOfX(7)), 49, ACCURACY);
+        assertEquals(testFunction.interpolate(5, testFunction.floorIndexOfX(5)), 25, ACCURACY);
+        assertEquals(function1().interpolate(3, function1().floorIndexOfX(3)), 9, ACCURACY);
         assertEquals(testFunction.interpolate(6, testFunction.floorIndexOfX(6)), 36, ACCURACY);
     }
 }
