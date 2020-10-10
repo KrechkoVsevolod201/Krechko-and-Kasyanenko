@@ -13,11 +13,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        double auxiliaryVar = xFrom;
+        double AddVar = xFrom;
         double step = (xTo - xFrom) / (count - 1);
         for (int i = 0; i < count; i++) {
-            this.addNode(auxiliaryVar, source.apply(auxiliaryVar));
-            auxiliaryVar += step;
+            this.addNode(AddVar, source.apply(AddVar));
+            AddVar += step;
         }
     }
 
@@ -97,15 +97,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfX(double x) {
-        Node auxiliaryVar;
-        auxiliaryVar = head;
+        Node AddVar;
+        AddVar = head;
         for (int i = 0; i < count; i++) {
-            if (!Double.isNaN(auxiliaryVar.x) && (auxiliaryVar.x == x)) {
+            if (!Double.isNaN(AddVar.x) && (AddVar.x == x)) {
                 return i;
-            } else if (Double.isNaN(auxiliaryVar.x) && Double.isNaN(x)) {
+            } else if (Double.isNaN(AddVar.x) && Double.isNaN(x)) {
                 return i;
             } else {
-                auxiliaryVar = auxiliaryVar.next;
+                AddVar = AddVar.next;
             }
         }
         return -1;
@@ -113,15 +113,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfY(double y) {
-        Node auxiliaryVar;
-        auxiliaryVar = head;
+        Node AddVar;
+        AddVar = head;
         for (int i = 0; i < count; i++) {
-            if (!Double.isNaN(auxiliaryVar.y) && (auxiliaryVar.y == y)) {
+            if (!Double.isNaN(AddVar.y) && (AddVar.y == y)) {
                 return i;
-            } else if (Double.isNaN(auxiliaryVar.y) && Double.isNaN(y)) {
+            } else if (Double.isNaN(AddVar.y) && Double.isNaN(y)) {
                 return i;
             } else {
-                auxiliaryVar = auxiliaryVar.next;
+                AddVar = AddVar.next;
             }
         }
         return -1;
@@ -129,13 +129,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected int floorIndexOfX(double x) {
-        Node auxiliaryVar;
-        auxiliaryVar = head;
+        Node AddVar;
+        AddVar = head;
         int flag = 0;
         for (int i = 0; i < count; i++) {
-            if (auxiliaryVar.x < x) {
+            if (AddVar.x < x) {
                 flag += 1;
-                auxiliaryVar = auxiliaryVar.next;
+                AddVar = AddVar.next;
             }
             if (flag == 0) {
                 return 0;
