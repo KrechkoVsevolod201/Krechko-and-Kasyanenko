@@ -137,15 +137,14 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 flag += 1;
                 AddVar = AddVar.next;
             }
-            if (flag == 0) {
-                return 0;
-            } else if (flag == count) {
-                return count;
-            } else {
-                return flag;
-            }
         }
-        return 0;
+        if (flag == 0) {
+            return 0;
+        } else if (flag == count) {
+            return count;
+        } else {
+            return flag;
+        }
     }
 
     @Override
