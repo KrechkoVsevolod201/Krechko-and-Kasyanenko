@@ -60,7 +60,10 @@ public class AbstractTabulatedFunctionTest {
 
     @Test
     public void testFloorIndexOfX() {
+        assertEquals(newMock.floorIndexOfX(-10),0,delta);
         assertEquals(newMock.floorIndexOfX(2),0,delta);
+        assertEquals(newMock.floorIndexOfX(10),0,delta);
+        assertEquals(newMock.floorIndexOfX(3),0,delta);
     }
 
     @Test
