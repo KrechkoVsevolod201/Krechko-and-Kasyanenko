@@ -28,29 +28,21 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testApply() {
-        final LinkedListTabulatedFunction testFunction = new LinkedListTabulatedFunction(xArr, yArr);
-        assertEquals(testFunction.apply(1.0), 1, delta);
-        assertNotEquals(testFunction.apply(5.0), 1, delta);
-        assertEquals(testFunction.apply(4.0), 14.0, delta);
-        assertEquals(testFunction.apply(12), 54, delta);
-    }
-
-    @Test
-    public void testApply1() {
-        final LinkedListTabulatedFunction testFunction = new LinkedListTabulatedFunction(funArr, funArr);
-        assertEquals(testFunction.apply(1.0), Double.NaN, delta);
-        assertNotEquals(testFunction.apply(5.0), 8, delta);
-        assertEquals(testFunction.apply(4.0), Double.NaN, delta);
-        assertEquals(testFunction.apply(12), Double.NaN, delta);
-    }
-
-    @Test
-    public void testApply2() {
-        final LinkedListTabulatedFunction testFunction = new LinkedListTabulatedFunction(ePiZero, ePiZero);
-        assertEquals(testFunction.apply(1.0), 1, delta);
-        assertNotEquals(testFunction.apply(5.0), 1, delta);
-        assertEquals(testFunction.apply(4.0), 4, delta);
-        assertEquals(testFunction.apply(12), 12, delta);
+        final LinkedListTabulatedFunction testFunctionArr = new LinkedListTabulatedFunction(xArr, yArr);
+        final LinkedListTabulatedFunction testFunctionFun = new LinkedListTabulatedFunction(funArr, funArr);
+        final LinkedListTabulatedFunction testFunctionEPiZero = new LinkedListTabulatedFunction(ePiZero, ePiZero);
+        assertEquals(testFunctionArr.apply(1.0), 1, delta);
+        assertNotEquals(testFunctionArr.apply(5.0), 1, delta);
+        assertEquals(testFunctionArr.apply(4.0), 14.0, delta);
+        assertEquals(testFunctionArr.apply(12), 54, delta);
+        assertEquals(testFunctionFun.apply(1.0), Double.NaN, delta);
+        assertNotEquals(testFunctionFun.apply(5.0), 8, delta);
+        assertEquals(testFunctionFun.apply(4.0), Double.NaN, delta);
+        assertEquals(testFunctionFun.apply(12), Double.NaN, delta);
+        assertEquals(testFunctionEPiZero.apply(1.0), 1, delta);
+        assertNotEquals(testFunctionEPiZero.apply(5.0), 1, delta);
+        assertEquals(testFunctionEPiZero.apply(4.0), 4, delta);
+        assertEquals(testFunctionEPiZero.apply(12), 12, delta);
     }
 
     @Test
@@ -77,9 +69,9 @@ public class LinkedListTabulatedFunctionTest {
         testList().setY(2, Double.POSITIVE_INFINITY);
         testListEPiZero().setY(3, Double.NaN);
 
-        assertEquals(testListFun().getY(1), 1, delta);
-        assertEquals(testList().getY(2), Double.POSITIVE_INFINITY);
-        assertEquals(testListEPiZero().getY(3), Double.NaN);
+        assertEquals(testListFun().getY(1), Double.POSITIVE_INFINITY, delta);
+        assertEquals(testList().getY(2), 9);
+        assertEquals(testListEPiZero().getY(3), Math.E);
     }
 
     @Test
@@ -142,5 +134,6 @@ public class LinkedListTabulatedFunctionTest {
     public void testInterpolate() {
         assertEquals(testList().interpolate(1.9, 0), 3.7, delta);
         assertEquals(testList().interpolate(-1, 0), -5, delta);
-        assertEquals(testList().interpolate(1, 0), 1, delta);    }
+        assertEquals(testList().interpolate(1, 0), 1, delta);
+    }
 }
