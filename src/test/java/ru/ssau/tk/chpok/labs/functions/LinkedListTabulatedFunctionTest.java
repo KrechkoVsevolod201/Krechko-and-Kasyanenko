@@ -6,8 +6,8 @@ import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
 
-    protected final double[] xArr = new double[]{1d, 2d, 3d};
-    protected final double[] yArr = new double[]{1d, 4d, 9d};
+    protected final double[] xArr = new double[]{1d, 6d, 7d};
+    protected final double[] yArr = new double[]{1d, 36d, 49d};
 
     protected final double[] funArr = new double[]{Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
     protected final double[] ePiZero = new double[]{Math.E, Math.PI, 0d};
@@ -33,8 +33,8 @@ public class LinkedListTabulatedFunctionTest {
         final LinkedListTabulatedFunction testFunctionEPiZero = new LinkedListTabulatedFunction(ePiZero, ePiZero);
         assertEquals(testFunctionArr.apply(1.0), 1, delta);
         assertNotEquals(testFunctionArr.apply(5.0), 1, delta);
-        assertEquals(testFunctionArr.apply(4.0), 14.0, delta);
-        assertEquals(testFunctionArr.apply(12), 54, delta);
+        assertEquals(testFunctionArr.apply(4.0), 10.0, delta);
+        assertEquals(testFunctionArr.apply(12), 114, delta);
         assertEquals(testFunctionFun.apply(1.0), Double.NaN, delta);
         assertNotEquals(testFunctionFun.apply(5.0), 8, delta);
         assertEquals(testFunctionFun.apply(4.0), Double.NaN, delta);
@@ -70,7 +70,7 @@ public class LinkedListTabulatedFunctionTest {
         testListEPiZero().setY(3, Double.NaN);
 
         assertEquals(testListFun().getY(1), Double.POSITIVE_INFINITY, delta);
-        assertEquals(testList().getY(2), 9);
+        assertEquals(testList().getY(2), 49);
         assertEquals(testListEPiZero().getY(3), Math.E);
     }
 
@@ -90,21 +90,21 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testRightBound() {
-        assertEquals(testList().rightBound(), 3, delta);
+        assertEquals(testList().rightBound(), 7, delta);
         assertEquals(testListFun().rightBound(), Double.NEGATIVE_INFINITY, delta);
         assertEquals(testListEPiZero().rightBound(), 0, delta);
     }
 
     @Test
     public void testIndexOfX() {
-        assertEquals(testList().indexOfX(2), 1, delta);
+        assertEquals(testList().indexOfX(2), -1, delta);
         assertEquals(testListEPiZero().indexOfX(Math.PI), 1, delta);
         assertEquals(testListFun().indexOfX(Double.NaN), 0, delta);
     }
 
     @Test
     public void testIndexOfY() {
-        assertEquals(testList().indexOfY(4), 1, delta);
+        assertEquals(testList().indexOfY(4), -1, delta);
         assertEquals(testListEPiZero().indexOfY(Math.PI), 1, delta);
         assertEquals(testListFun().indexOfY(Double.NaN), 0, delta);
     }
@@ -118,22 +118,22 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateLeft() {
-        assertEquals(testList().extrapolateLeft(1.9), 3.7, delta);
+        assertEquals(testList().extrapolateLeft(2), 8, delta);
         assertEquals(testList().extrapolateLeft(1), 1, delta);
-        assertEquals(testList().extrapolateLeft(-1), -5, delta);
+        assertEquals(testList().extrapolateLeft(-1), -13, delta);
     }
 
     @Test
     public void testExtrapolateRight() {
-        assertEquals(testList().extrapolateRight(1), -1, delta);
-        assertEquals(testList().extrapolateRight(-1), -11, delta);
-        assertEquals(testList().extrapolateRight(5), 19, delta);
+        assertEquals(testList().extrapolateRight(1), -29, delta);
+        assertEquals(testList().extrapolateRight(-1), -55, delta);
+        assertEquals(testList().extrapolateRight(5), 23, delta);
     }
 
     @Test
     public void testInterpolate() {
-        assertEquals(testList().interpolate(1.9, 0), 3.7, delta);
-        assertEquals(testList().interpolate(-1, 0), -5, delta);
+        assertEquals(testList().interpolate(5, 0), 29, delta);
+        assertEquals(testList().interpolate(-1, 0), -13, delta);
         assertEquals(testList().interpolate(1, 0), 1, delta);
     }
 }
