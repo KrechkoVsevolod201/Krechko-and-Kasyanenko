@@ -114,6 +114,12 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(testList().floorIndexOfX(2), 1, delta);
         assertEquals(testListFun().floorIndexOfX(1), 0, delta);
         assertEquals(testListEPiZero().floorIndexOfX(3), 1, delta);
+        assertEquals(testList().floorIndexOfX(Double.POSITIVE_INFINITY), 3, delta);
+        assertEquals(testListFun().floorIndexOfX(Double.POSITIVE_INFINITY), 0, delta);
+        assertEquals(testListEPiZero().floorIndexOfX(Double.POSITIVE_INFINITY), 3, delta);
+        assertEquals(testList().floorIndexOfX(Double.NEGATIVE_INFINITY), 0, delta);
+        assertEquals(testListFun().floorIndexOfX(Double.NEGATIVE_INFINITY), 0, delta);
+        assertEquals(testListEPiZero().floorIndexOfX(Double.NEGATIVE_INFINITY), 0, delta);
     }
 
     @Test
