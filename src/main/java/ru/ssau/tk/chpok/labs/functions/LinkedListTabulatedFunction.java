@@ -5,14 +5,21 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private int count;
 
-    public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("Array size is smaller than 2");
+        } else if (yValues.length < 2) {
+            throw new IllegalArgumentException("Array size is smaller than 2");
+        }
         this.count = xValues.length;
         for (int i = 0; i < count; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
     }
-
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) {
+            throw new IllegalArgumentException("Array size is smaller than 2");
+        }
         double AddVar = xFrom;
         double step = (xTo - xFrom) / (count - 1);
         for (int i = 0; i < count; i++) {
