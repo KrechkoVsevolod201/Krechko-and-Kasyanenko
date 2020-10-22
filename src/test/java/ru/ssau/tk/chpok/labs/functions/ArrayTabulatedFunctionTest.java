@@ -12,11 +12,28 @@ public class ArrayTabulatedFunctionTest {
     private final MathFunction indetityFunction = new IdentityFunction();
 
     private ArrayTabulatedFunction function() {
+
         return new ArrayTabulatedFunction(sqr, 2, 9, 8);
     }
 
     private ArrayTabulatedFunction function1() {
+
         return new ArrayTabulatedFunction(xArr, yArr);
+    }
+
+    @Test
+    public void testArrayTabulatedFunction() {
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new ArrayTabulatedFunction(xArr, new double[]{1d, 4d}));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new ArrayTabulatedFunction(new double[]{1d, 4d}, yArr));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new ArrayTabulatedFunction(xArr, new double[]{}));
+
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{1d}, new double[]{1d}));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{}, new double[]{}));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{2d}, new double[]{0d}));
+
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 1, 2, 1));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 0, 0, 0));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(sqr, 1, 2, -2));
     }
 
     @Test
@@ -45,12 +62,16 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testGetX() {
         assertEquals(function().getX(0), 2);
-        assertEquals(function().getX(-1), 2);
+        assertEquals(function().getX(2), 4);
         assertEquals(function().getX(1), 3, ACCURACY);
         assertEquals(function().getX(2), 4, ACCURACY);
         assertEquals(function1().getX(0), 1);
         assertEquals(function1().getX(1), 2, ACCURACY);
         assertEquals(function1().getX(2), 3, ACCURACY);
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> function().getX(-20));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> function().getX(10));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> function().getX(9));
     }
 
     @Test
@@ -61,6 +82,10 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(function1().getY(0), 1);
         assertEquals(function1().getY(1), 4);
         assertEquals(function1().getY(2), 9, ACCURACY);
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> function().getY(-40));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> function().getY(40));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> function().getY(15));
     }
 
     @Test
@@ -124,6 +149,10 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(function().floorIndexOfX(3), 0);
         assertEquals(function1().floorIndexOfX(2), 0);
         assertEquals(function1().floorIndexOfX(3), 1);
+
+        assertThrows(IllegalArgumentException.class, () -> testFunction.floorIndexOfX(-25));
+        assertThrows(IllegalArgumentException.class, () -> testFunction.floorIndexOfX(0));
+        assertThrows(IllegalArgumentException.class, () -> testFunction.floorIndexOfX(Double.NEGATIVE_INFINITY));
     }
 
     @Test
@@ -155,6 +184,10 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(function().interpolate(3, function().floorIndexOfX(3)), 9, ACCURACY);
         assertEquals(function1().interpolate(3, function1().floorIndexOfX(3)), 9, ACCURACY);
         assertEquals(testFunction.interpolate(6, testFunction.floorIndexOfX(6)), 36, ACCURACY);
-    }
 
+        assertThrows(IllegalArgumentException.class, () -> anotherFunction.interpolate(15, anotherFunction.floorIndexOfX(1)));
+        assertThrows(IllegalArgumentException.class, () -> anotherFunction.interpolate(10, anotherFunction.floorIndexOfX(7)));
+        assertThrows(IllegalArgumentException.class, () -> function().interpolate(0, function().floorIndexOfX(0)));
+    }
 }
+
