@@ -180,6 +180,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
     }
 
+
+
     private static class Node {
         private Node next;
         private Node prev;
