@@ -45,6 +45,7 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testGetX() {
         assertEquals(function().getX(0), 2);
+        assertEquals(function().getX(-1), 2);
         assertEquals(function().getX(1), 3, ACCURACY);
         assertEquals(function().getX(2), 4, ACCURACY);
         assertEquals(function1().getX(0), 1);

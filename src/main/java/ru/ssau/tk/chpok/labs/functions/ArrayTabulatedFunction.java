@@ -2,6 +2,7 @@ package ru.ssau.tk.chpok.labs.functions;
 
 import java.util.Arrays;
 import static java.lang.Math.abs;
+import java.util.Iterator;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final double[] xValues;
@@ -9,12 +10,21 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length != yValues.length) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("length of the array is less than 2");
+        }
         count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) {
+            throw new IllegalArgumentException("length of the array is less than 2");
+        }
         this.count = count;
         xValues = new double[count];
         yValues = new double[count];
@@ -78,8 +88,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int floorIndexOfX(double x) {
-        if (x - leftBound() < 0) {
-            return 0;
+        if (x < leftBound()) {
+            throw new IllegalArgumentException("x < leftBound");
         }
 
         if (x - rightBound() > 0) {
@@ -111,6 +121,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double interpolate(double x, int floorIndex) {
+        if(x < xValues[floorIndex] || xValues[floorIndex + 1] < x){
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
         if (count == 1) {
             return yValues[1];
         }
@@ -123,4 +136,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
 
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
+    }
 }
