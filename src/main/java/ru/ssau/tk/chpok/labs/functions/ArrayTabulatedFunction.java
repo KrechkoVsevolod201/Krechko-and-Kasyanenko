@@ -1,7 +1,7 @@
 package ru.ssau.tk.chpok.labs.functions;
 
 import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
-
+import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
 import java.util.Arrays;
 import static java.lang.Math.abs;
 import java.util.Iterator;
@@ -123,8 +123,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double interpolate(double x, int floorIndex) {
+
         if(x < xValues[floorIndex] || xValues[floorIndex + 1] < x){
-            throw new IllegalArgumentException("Index is out of bounds");
+            throw new InterpolationException("Index is out of bounds");
         }
         if (count == 1) {
             return yValues[1];
