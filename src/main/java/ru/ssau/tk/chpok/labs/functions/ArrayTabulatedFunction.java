@@ -1,5 +1,7 @@
 package ru.ssau.tk.chpok.labs.functions;
 
+import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
+
 import java.util.Arrays;
 import static java.lang.Math.abs;
 import java.util.Iterator;
@@ -11,7 +13,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length) {
-            throw new ArrayIndexOutOfBoundsException();
+            throw new DifferentLengthOfArraysException();
         }
         if (xValues.length < 2) {
             throw new IllegalArgumentException("length of the array is less than 2");

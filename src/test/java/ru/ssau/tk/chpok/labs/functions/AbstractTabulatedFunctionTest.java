@@ -83,6 +83,17 @@ public class AbstractTabulatedFunctionTest {
 
     @Test
     public void testTestInterpolate() {
+
+    }
+
+    @Test
+    public void testCheckLengthIsTheSame(){
+
+    }
+
+    @Test
+    public void testCheckSorted(){
+
     }
 
 }

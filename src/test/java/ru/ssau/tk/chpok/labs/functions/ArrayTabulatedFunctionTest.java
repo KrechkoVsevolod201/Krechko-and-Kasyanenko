@@ -1,6 +1,7 @@
 package ru.ssau.tk.chpok.labs.functions;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 
 import static org.testng.Assert.*;
 
@@ -23,9 +24,9 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testArrayTabulatedFunction() {
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new ArrayTabulatedFunction(xArr, new double[]{1d, 4d}));
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new ArrayTabulatedFunction(new double[]{1d, 4d}, yArr));
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new ArrayTabulatedFunction(xArr, new double[]{}));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(xArr, new double[]{1d, 4d}));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(new double[]{1d, 4d}, yArr));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(xArr, new double[]{}));
 
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{1d}, new double[]{1d}));
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(new double[]{}, new double[]{}));
@@ -132,8 +133,8 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testRightBound() {
-        final ArrayTabulatedFunction anotherFunction = new ArrayTabulatedFunction(indetityFunction, 3, 4, 1);
-        assertEquals(anotherFunction.rightBound(), 3, ACCURACY);
+        final ArrayTabulatedFunction anotherFunction = new ArrayTabulatedFunction(indetityFunction, 3, 4, 2);
+        assertEquals(anotherFunction.rightBound(), 4, ACCURACY);
         assertEquals(function().rightBound(), 9, ACCURACY);
         assertEquals(function1().rightBound(), 3, ACCURACY);
 

@@ -1,5 +1,5 @@
 package ru.ssau.tk.chpok.labs.functions;
-
+import ru.ssau.tk.chpok.labs.exceptions.*;
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
@@ -172,11 +172,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (count == 1) {
-            return x;
-        }
         Node floor = getNode(floorIndex);
         Node ceiling = floor.next;
+        if (x<floor.x || x> ceiling.x) {
+            throw new InterpolationException("x is out of bounds of interpolation");
+        }
         return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
     }
 
