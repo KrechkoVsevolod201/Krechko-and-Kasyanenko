@@ -3,9 +3,25 @@ package ru.ssau.tk.chpok.labs.functions;
 import org.testng.annotations.Test;
 import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
+import java.util.NoSuchElementException;
 import static org.testng.Assert.*;
+import static ru.ssau.tk.chpok.labs.functions.ArrayTabulatedFunction.createTabulatedFunctionDefinedThroughArray;
+
+import java.util.Iterator;
 
 public class ArrayTabulatedFunctionTest {
+
+    private final double[] xValues = new double[]{-3., -2., -1., 0, 1., 2., 3.};
+    private final double[] yValues = new double[]{9., 4., 1., 0, 1., 4, 9.};
+
+    public static ArrayTabulatedFunction createTabulatedFunctionDefinedThroughArray(double[] xValues, double[] yValues) {
+        return new ArrayTabulatedFunction(xValues, yValues);
+    }
+
+    public static ArrayTabulatedFunction createTabulatedFunctionDefinedThroughMathFunction(MathFunction source, double xFrom, double xTo, int count) {
+        return new ArrayTabulatedFunction(source, xFrom, xTo, count);
+    }
+
     protected final double[] xArr = new double[]{1d, 2d, 3d};
     protected final double[] yArr = new double[]{1d, 4d, 9d};
     private final double ACCURACY = 0.0001;
@@ -21,6 +37,7 @@ public class ArrayTabulatedFunctionTest {
 
         return new ArrayTabulatedFunction(xArr, yArr);
     }
+
 
     @Test
     public void testArrayTabulatedFunction() {
@@ -189,6 +206,47 @@ public class ArrayTabulatedFunctionTest {
         assertThrows(IllegalArgumentException.class, () -> anotherFunction.interpolate(15, anotherFunction.floorIndexOfX(1)));
         assertThrows(InterpolationException.class, () -> anotherFunction.interpolate(10, anotherFunction.floorIndexOfX(7)));
         assertThrows(IllegalArgumentException.class, () -> function().interpolate(0, function().floorIndexOfX(0)));
+    }
+
+    @Test
+    public void testIteratorWhile() {
+        ArrayTabulatedFunction DefinedThroughArrays = createTabulatedFunctionDefinedThroughArray(xValues, yValues);
+        Iterator<Point> myIterator = DefinedThroughArrays.iterator();
+        int i = 0;
+        while (myIterator.hasNext()) {
+            Point myPoint = myIterator.next();
+            assertEquals(DefinedThroughArrays.getX(i), myPoint.x, 0.001);
+            assertEquals(DefinedThroughArrays.getY(i++), myPoint.y, 0.001);
+        }
+        assertEquals(DefinedThroughArrays.getCount(), i);
+        ArrayTabulatedFunction DefinedThroughMathFunction = createTabulatedFunctionDefinedThroughArray(xValues, yValues);
+        myIterator = DefinedThroughMathFunction.iterator();
+        i = 0;
+        while (myIterator.hasNext()) {
+            Point myPoint = myIterator.next();
+            assertEquals(DefinedThroughMathFunction.getX(i), myPoint.x, 0.001);
+            assertEquals(DefinedThroughMathFunction.getY(i++), myPoint.y, 0.001);
+        }
+        assertEquals(DefinedThroughMathFunction.getCount(), i);
+        assertThrows(NoSuchElementException.class, myIterator::next);
+    }
+
+    @Test
+    public void testIteratorForEach() {
+        ArrayTabulatedFunction DefinedThroughArrays = createTabulatedFunctionDefinedThroughArray(xValues, yValues);
+        int i = 0;
+        for (Point myPoint : DefinedThroughArrays) {
+            assertEquals(myPoint.x, DefinedThroughArrays.getX(i), 0.001);
+            assertEquals(myPoint.y, DefinedThroughArrays.getY(i++), 0.001);
+        }
+        assertEquals(DefinedThroughArrays.getCount(), i);
+        ArrayTabulatedFunction testDefinedThroughMathFunction = createTabulatedFunctionDefinedThroughArray(xValues, yValues);
+        i = 0;
+        for (Point myPoint : testDefinedThroughMathFunction) {
+            assertEquals(myPoint.x, testDefinedThroughMathFunction.getX(i), 0.001);
+            assertEquals(myPoint.y, testDefinedThroughMathFunction.getY(i++), 0.001);
+        }
+        assertEquals(testDefinedThroughMathFunction.getCount(), i);
     }
 }
 
