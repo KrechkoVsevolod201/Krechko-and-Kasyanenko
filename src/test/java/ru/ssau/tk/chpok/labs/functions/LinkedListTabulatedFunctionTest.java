@@ -1,7 +1,7 @@
 package ru.ssau.tk.chpok.labs.functions;
 
 import org.testng.annotations.Test;
-
+import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
@@ -139,7 +139,7 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testInterpolate() {
         assertEquals(testList().interpolate(5, 0), 29, delta);
-        assertEquals(testList().interpolate(-1, 0), -13, delta);
+        assertThrows(InterpolationException.class, () -> testList().interpolate(10, testList().floorIndexOfX(7)));
         assertEquals(testList().interpolate(1, 0), 1, delta);
     }
 }

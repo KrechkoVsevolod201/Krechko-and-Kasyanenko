@@ -2,7 +2,7 @@ package ru.ssau.tk.chpok.labs.functions;
 
 import org.testng.annotations.Test;
 import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
-
+import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
 import static org.testng.Assert.*;
 
 public class ArrayTabulatedFunctionTest {
@@ -187,7 +187,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testFunction.interpolate(6, testFunction.floorIndexOfX(6)), 36, ACCURACY);
 
         assertThrows(IllegalArgumentException.class, () -> anotherFunction.interpolate(15, anotherFunction.floorIndexOfX(1)));
-        assertThrows(IllegalArgumentException.class, () -> anotherFunction.interpolate(10, anotherFunction.floorIndexOfX(7)));
+        assertThrows(InterpolationException.class, () -> anotherFunction.interpolate(10, anotherFunction.floorIndexOfX(7)));
         assertThrows(IllegalArgumentException.class, () -> function().interpolate(0, function().floorIndexOfX(0)));
     }
 }
