@@ -2,6 +2,9 @@ package ru.ssau.tk.chpok.labs.functions;
 
 import org.testng.annotations.Test;
 import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
@@ -142,4 +145,22 @@ public class LinkedListTabulatedFunctionTest {
         assertThrows(InterpolationException.class, () -> testList().interpolate(10, testList().floorIndexOfX(7)));
         assertEquals(testList().interpolate(1, 0), 1, delta);
     }
+    @Test
+    public void testIterator() {
+        LinkedListTabulatedFunction test = testList();
+        Iterator<Point> iterator = test.iterator();
+        int j = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(test.getX(j), point.x, delta);
+            assertEquals(test.getY(j), point.y, delta);
+            j++;
+        }
+        j = 0;
+        for (Point point : test) {
+            assertEquals(test.getX(j), point.x, delta);
+            assertEquals(test.getY(j++), point.y, delta);
+        }
+    }
+
 }

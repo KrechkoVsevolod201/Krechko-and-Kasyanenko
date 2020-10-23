@@ -1,5 +1,7 @@
 package ru.ssau.tk.chpok.labs.functions;
 
+import java.util.Iterator;
+
 public class MockTabulatedFunction extends AbstractTabulatedFunction {
     private final double x0 = 2;
     private final double x1 = 4;
@@ -63,5 +65,10 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     protected double interpolate(double x, int floorIndex) {
         return interpolate(x, x0, x1, y0, y1);
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        return null;
     }
 }
