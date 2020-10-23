@@ -1,11 +1,16 @@
 package ru.ssau.tk.chpok.labs.functions;
+
 import ru.ssau.tk.chpok.labs.exceptions.*;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
     private int count;
 
-        public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+    public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
         } else if (yValues.length < 2) {
@@ -16,6 +21,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             this.addNode(xValues[i], yValues[i]);
         }
     }
+
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         if (count < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
@@ -174,12 +180,17 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     protected double interpolate(double x, int floorIndex) {
         Node floor = getNode(floorIndex);
         Node ceiling = floor.next;
-        if (x<floor.x || x> ceiling.x) {
+        if (x < floor.x || x > ceiling.x) {
             throw new InterpolationException("x is out of bounds of interpolation");
         }
         return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
     }
 
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
+    }
 
 
     private static class Node {
