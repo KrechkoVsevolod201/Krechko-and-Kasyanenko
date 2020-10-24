@@ -16,9 +16,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length != yValues.length) {
-            throw new DifferentLengthOfArraysException();
-        }
+        super.checkLengthIsTheSame(xValues, yValues);
+        super.checkSorted(xValues);
+        super.checkSorted(yValues);
         if (xValues.length < 2) {
             throw new IllegalArgumentException("length of the array is less than 2");
         }

@@ -1,21 +1,23 @@
 package ru.ssau.tk.chpok.labs.functions;
 
+import org.testng.Assert;
 import ru.ssau.tk.chpok.labs.exceptions.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
-
     private int count;
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        super.checkLengthIsTheSame(xValues, yValues);
+        super.checkSorted(xValues);
+        super.checkSorted(yValues);
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
-        } else if (yValues.length < 2) {
+        } /*else if (yValues.length < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
-        }
+        }*/
         this.count = xValues.length;
         for (int i = 0; i < count; i++) {
             this.addNode(xValues[i], yValues[i]);
@@ -26,11 +28,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (count < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
         }
-        double AddVar = xFrom;
+        double addVar = xFrom;
         double step = (xTo - xFrom) / (count - 1);
         for (int i = 0; i < count; i++) {
-            this.addNode(AddVar, source.apply(AddVar));
-            AddVar += step;
+            this.addNode(addVar, source.apply(addVar));
+            addVar += step;
         }
     }
 
@@ -110,15 +112,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfX(double x) {
-        Node AddVar;
-        AddVar = head;
+        Node addVar;
+        addVar = head;
         for (int i = 0; i < count; i++) {
-            if (!Double.isNaN(AddVar.x) && (AddVar.x == x)) {
+            if (!Double.isNaN(addVar.x) && (addVar.x == x)) {
                 return i;
-            } else if (Double.isNaN(AddVar.x) && Double.isNaN(x)) {
+            } else if (Double.isNaN(addVar.x) && Double.isNaN(x)) {
                 return i;
             } else {
-                AddVar = AddVar.next;
+                addVar = addVar.next;
             }
         }
         return -1;
@@ -126,15 +128,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfY(double y) {
-        Node AddVar;
-        AddVar = head;
+        Node addVar;
+        addVar = head;
         for (int i = 0; i < count; i++) {
-            if (!Double.isNaN(AddVar.y) && (AddVar.y == y)) {
+            if (!Double.isNaN(addVar.y) && (addVar.y == y)) {
                 return i;
-            } else if (Double.isNaN(AddVar.y) && Double.isNaN(y)) {
+            } else if (Double.isNaN(addVar.y) && Double.isNaN(y)) {
                 return i;
             } else {
-                AddVar = AddVar.next;
+                addVar = addVar.next;
             }
         }
         return -1;
@@ -142,13 +144,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected int floorIndexOfX(double x) {
-        Node AddVar;
-        AddVar = head;
+        Node addVar;
+        addVar = head;
         int flag = 0;
         for (int i = 0; i < count; i++) {
-            if (AddVar.x < x) {
+            if (addVar.x < x) {
                 flag += 1;
-                AddVar = AddVar.next;
+                addVar = addVar.next;
             }
         }
         if (flag == 0) {
