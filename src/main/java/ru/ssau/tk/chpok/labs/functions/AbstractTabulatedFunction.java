@@ -1,5 +1,6 @@
 package ru.ssau.tk.chpok.labs.functions;
 
+import org.testng.Assert;
 import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.chpok.labs.exceptions.ArrayIsNotSortedException;
 
@@ -34,13 +35,14 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
         }
     }
 
-    void checkLengthIsTheSame(double[] xValues, double[] yValues) {
+    Assert.ThrowingRunnable checkLengthIsTheSame(double[] xValues, double[] yValues) {
         int xV, yV;
         xV = xValues.length;
         yV = yValues.length;
         if (xV != yV) {
             throw new DifferentLengthOfArraysException("Lengths of xValues and yValues are different");
         }
+        return null;
     }
 
     void checkSorted(double[] xValues) {

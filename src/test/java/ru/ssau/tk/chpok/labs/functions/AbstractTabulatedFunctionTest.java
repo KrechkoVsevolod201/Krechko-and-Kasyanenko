@@ -1,12 +1,23 @@
 package ru.ssau.tk.chpok.labs.functions;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.chpok.labs.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 
 import static org.testng.Assert.*;
 
 public class AbstractTabulatedFunctionTest {
     MockTabulatedFunction newMock = new MockTabulatedFunction();
     private static final double delta = 0.001;
+    protected final double[] xArr = new double[]{1d, 6d, 7d};
+    protected final double[] xArrAnotherWrong = new double[]{81d, 36d, 49d};
+    protected final double[] xArrLong = new double[]{1d, 6d, 7d, 8d, 9d};
+    protected final double[] xArrWrong = new double[]{1d, 36d, 64d, 49d,  81d};
+
+    private ArrayTabulatedFunction function() {
+
+        return new ArrayTabulatedFunction(xArr, xArrLong);
+    }
     @Test
     public void testApply() {
         assertEquals(newMock.apply(1), 4, delta);//less than leftBound
@@ -89,11 +100,14 @@ public class AbstractTabulatedFunctionTest {
     @Test
     public void testCheckLengthIsTheSame(){
 
+        assertThrows(DifferentLengthOfArraysException.class, () -> newMock.checkLengthIsTheSame(xArr,xArrLong));
+        assertThrows(DifferentLengthOfArraysException.class, () -> newMock.checkLengthIsTheSame(xArrLong,xArr));
     }
 
     @Test
     public void testCheckSorted(){
-
+        assertThrows(ArrayIsNotSortedException.class, () -> newMock.checkSorted(xArrWrong));
+        assertThrows(ArrayIsNotSortedException.class, () -> newMock.checkSorted(xArrAnotherWrong));
     }
 
 }
