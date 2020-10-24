@@ -188,6 +188,14 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
     }
 
+    public static LinkedListTabulatedFunction createTabulatedFunctionDefinedThroughList(double[] valuesX, double[] valuesY) {
+        return new LinkedListTabulatedFunction(valuesX, valuesY);
+    }
+
+    public static LinkedListTabulatedFunction createTabulatedFunctionDefinedThroughMathFunction(MathFunction source, double xFrom, double xTo, int count) {
+        return new LinkedListTabulatedFunction(source, xFrom, xTo, count);
+    }
+
 
     @Override
     public Iterator<Point> iterator() {

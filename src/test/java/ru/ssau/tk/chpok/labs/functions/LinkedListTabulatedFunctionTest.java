@@ -1,6 +1,8 @@
 package ru.ssau.tk.chpok.labs.functions;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.chpok.labs.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
 
 import java.util.Iterator;
@@ -14,7 +16,7 @@ public class LinkedListTabulatedFunctionTest {
 
     protected final double[] funArr = new double[]{Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
     protected final double[] ePiZero = new double[]{Math.E, Math.PI, 0d};
-
+    private final MathFunction sqrtFunc = new SqrtFunction();
     private static final double delta = 0.001;
 
     public LinkedListTabulatedFunction testList() {
@@ -28,7 +30,20 @@ public class LinkedListTabulatedFunctionTest {
     public LinkedListTabulatedFunction testListEPiZero() {
         return new LinkedListTabulatedFunction(ePiZero, ePiZero);
     }
-
+    @Test
+    public void testConstructor() {
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(new double[]{1}, new double[]{1}));
+        assertThrows(IllegalArgumentException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(new double[]{}, new double[]{}));
+        assertThrows(DifferentLengthOfArraysException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(new double[]{1, 4}, new double[]{1}));
+        assertThrows(DifferentLengthOfArraysException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(new double[]{1, 5, 6}, new double[]{1, 5}));
+        assertThrows(DifferentLengthOfArraysException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(new double[]{1, 2, 3}, new double[]{1, 1, 1, 2}));
+        assertThrows(ArrayIsNotSortedException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(new double[]{1, 5, 2}, new double[]{1, 5, 10}));
+        assertThrows(ArrayIsNotSortedException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(new double[]{10, 9, 8}, new double[]{1, 5, 10}));
+        assertThrows(IllegalArgumentException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughMathFunction(sqrtFunc, 4, -1, 0));
+        assertThrows(IllegalArgumentException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughMathFunction(sqrtFunc, -10, 24, -33));
+        assertThrows(IllegalArgumentException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughMathFunction(sqrtFunc, 5, 6, 1));
+        assertThrows(IllegalArgumentException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughMathFunction(sqrtFunc, 5, 5, -1));
+    }
     @Test
     public void testApply() {
         final LinkedListTabulatedFunction testFunctionArr = new LinkedListTabulatedFunction(xArr, yArr);
