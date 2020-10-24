@@ -18,7 +18,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         super.checkLengthIsTheSame(xValues, yValues);
         super.checkSorted(xValues);
-        super.checkSorted(yValues);
         if (xValues.length < 2) {
             throw new IllegalArgumentException("length of the array is less than 2");
         }
@@ -111,17 +110,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        if (count == 1) {
-            return yValues[1];
-        }
+
         return interpolate(x, xValues[0], xValues[1], yValues[0], yValues[1]);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        if (count == 1) {
-            return yValues[1];
-        }
+
         return interpolate(x, xValues[count - 2], xValues[count - 1], yValues[count - 2], yValues[count - 1]);
     }
 
@@ -131,9 +126,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         if (x < xValues[floorIndex] || xValues[floorIndex + 1] < x) {
             throw new InterpolationException("Index is out of bounds");
         }
-        if (count == 1) {
-            return yValues[1];
-        }
+
         if (floorIndex == 0) {
             return extrapolateLeft(x);
         }

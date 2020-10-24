@@ -12,7 +12,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         super.checkLengthIsTheSame(xValues, yValues);
         super.checkSorted(xValues);
-        super.checkSorted(yValues);
+        //super.checkSorted(yValues);
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
         } /*else if (yValues.length < 2) {
@@ -164,17 +164,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double extrapolateLeft(double x) {
-        if (count == 1) {
-            return x;
-        }
+
         return interpolate(x, head.x, head.next.x, head.y, head.next.y);
     }
 
     @Override
     protected double extrapolateRight(double x) {
-        if (count == 1) {
-            return x;
-        }
+
         return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
     }
 
@@ -185,9 +181,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (x < floor.x || x > ceiling.x) {
             throw new InterpolationException("x is out of bounds of interpolation");
         }
+
         return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
     }
-
     public static LinkedListTabulatedFunction createTabulatedFunctionDefinedThroughList(double[] valuesX, double[] valuesY) {
         return new LinkedListTabulatedFunction(valuesX, valuesY);
     }

@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class ArrayTabulatedFunctionTest {
 
     private final double[] xValues = new double[]{-3., -2., -1., 0, 1., 2., 3.};
-    private final double[] yValues = new double[]{9., 4., 1., 0, 1., 4, 9.};
+    private final double[] yValues = new double[]{-9., -4., -1., 0, 1., 4, 9.};
 
     public static ArrayTabulatedFunction createTabulatedFunctionDefinedThroughArray(double[] xValues, double[] yValues) {
         return new ArrayTabulatedFunction(xValues, yValues);
