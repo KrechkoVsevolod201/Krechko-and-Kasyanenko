@@ -163,21 +163,22 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void testIterator() {
-        LinkedListTabulatedFunction test = testList();
-        Iterator<Point> iterator = test.iterator();
+    public void testIteratorThroughWhile() {
+        LinkedListTabulatedFunction definedThroughList = LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(xArr, yArr);
+        Iterator<Point> iterator = definedThroughList.iterator();
         int j = 0;
         while (iterator.hasNext()) {
             Point point = iterator.next();
-            assertEquals(test.getX(j), point.x, delta);
-            assertEquals(test.getY(j), point.y, delta);
-            j++;
+            assertEquals(point.x, definedThroughList.getX(j++));
         }
+        assertEquals(j, 3);
+        assertThrows(NoSuchElementException.class, iterator::next);
         j = 0;
-        for (Point point : test) {
-            assertEquals(test.getX(j), point.x, delta);
-            assertEquals(test.getY(j++), point.y, delta);
+        for (Point point : definedThroughList) {
+            assertEquals(point.x, definedThroughList.getX(j++));
         }
+        assertEquals(j, 3);
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 
 }

@@ -209,7 +209,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                     node = (node != head.prev) ? node.next : null;
                     return point;
                 } else {
-                    throw new NoSuchElementException();
+                    throw new NoSuchElementException("No such element");
                 }
             }
         };
