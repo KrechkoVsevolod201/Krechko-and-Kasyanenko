@@ -35,8 +35,8 @@ public class LinkedListTabulatedFunctionTest {
         final LinkedListTabulatedFunction testFunctionFun = new LinkedListTabulatedFunction(funArr, funArr);
         final LinkedListTabulatedFunction testFunctionEPiZero = new LinkedListTabulatedFunction(ePiZero, ePiZero);
         assertEquals(testFunctionArr.apply(1.0), 1, delta);
-        assertNotEquals(testFunctionArr.apply(5.0), 1, delta);
-        assertEquals(testFunctionArr.apply(4.0), 10.0, delta);
+        assertEquals(testFunctionArr.apply(7.0), 49.0, delta);
+        assertEquals(testFunctionArr.apply(6.0), 36.0, delta);
         assertEquals(testFunctionArr.apply(12), 114, delta);
         assertEquals(testFunctionFun.apply(1.0), Double.NaN, delta);
         assertNotEquals(testFunctionFun.apply(5.0), 8, delta);
@@ -47,6 +47,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(testFunctionEPiZero.apply(4.0), 4, delta);
         assertEquals(testFunctionEPiZero.apply(12), 12, delta);
     }
+
 
     @Test
     public void testGetX() {
@@ -145,6 +146,7 @@ public class LinkedListTabulatedFunctionTest {
         assertThrows(InterpolationException.class, () -> testList().interpolate(10, testList().floorIndexOfX(7)));
         assertEquals(testList().interpolate(1, 0), 1, delta);
     }
+
     @Test
     public void testIterator() {
         LinkedListTabulatedFunction test = testList();
