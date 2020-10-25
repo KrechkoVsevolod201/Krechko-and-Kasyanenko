@@ -1,11 +1,8 @@
 package ru.ssau.tk.chpok.labs.functions;
-
 import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
-
 import java.util.NoSuchElementException;
 import java.util.Arrays;
-
 import static java.lang.Math.abs;
 
 import java.util.Iterator;
@@ -64,7 +61,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public int indexOfX(double x) {
         for (int i = 0; i != count; i++) {
-            if (abs(xValues[i] - x) <= 0) {
+            if ((xValues[i] - x) <= 0) {
                 return i;
             }
         }
@@ -74,7 +71,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public int indexOfY(double y) {
         for (int i = 0; i != count; i++) {
-            if (abs(yValues[i] - y) <= 0) {
+            if ((yValues[i] - y) <= 0) {
                 return i;
             }
         }

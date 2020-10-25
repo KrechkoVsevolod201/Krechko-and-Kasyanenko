@@ -19,7 +19,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             throw new IllegalArgumentException("Array size is smaller than 2");
         }
 
-        this.count = xValues.length;
+        //this.count = xValues.length;
         for (int i = 0; i < count; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
@@ -39,6 +39,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private void addNode(double x, double y) {
         Node newNode = new Node();
+        this.count = ++this.count;
         if (head == null) {
             head = newNode;
             newNode.next = newNode;

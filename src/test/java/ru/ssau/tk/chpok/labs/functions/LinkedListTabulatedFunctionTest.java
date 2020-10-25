@@ -14,8 +14,8 @@ public class LinkedListTabulatedFunctionTest {
     protected final double[] xArr = new double[]{1d, 6d, 7d};
     protected final double[] yArr = new double[]{1d, 36d, 49d};
 
-    protected final double[] funArr = new double[]{Double.NEGATIVE_INFINITY, Double.NaN, Double.POSITIVE_INFINITY, };
-    protected final double[] ePiZero = new double[]{0d, Math.E, Math.PI};
+    protected final double[] funArr = new double[]{Double.NEGATIVE_INFINITY, 0d, Double.POSITIVE_INFINITY, };
+    protected final double[] ZeroEPi = new double[]{0d, Math.E, Math.PI};
     private final MathFunction sqrtFunc = new SqrtFunction();
     private static final double delta = 0.001;
 
@@ -28,7 +28,7 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     public LinkedListTabulatedFunction testListEPiZero() {
-        return new LinkedListTabulatedFunction(ePiZero, ePiZero);
+        return new LinkedListTabulatedFunction(ZeroEPi, ZeroEPi);
     }
     @Test
     public void testConstructor() {
@@ -48,7 +48,7 @@ public class LinkedListTabulatedFunctionTest {
     public void testApply() {
         final LinkedListTabulatedFunction testFunctionArr = new LinkedListTabulatedFunction(xArr, yArr);
         final LinkedListTabulatedFunction testFunctionFun = new LinkedListTabulatedFunction(funArr, funArr);
-        final LinkedListTabulatedFunction testFunctionEPiZero = new LinkedListTabulatedFunction(ePiZero, ePiZero);
+        final LinkedListTabulatedFunction testFunctionEPiZero = new LinkedListTabulatedFunction(ZeroEPi, ZeroEPi);
         assertEquals(testFunctionArr.apply(1.0), 1, delta);
         assertEquals(testFunctionArr.apply(7.0), 49.0, delta);
         assertEquals(testFunctionArr.apply(6.0), 36.0, delta);
@@ -69,7 +69,7 @@ public class LinkedListTabulatedFunctionTest {
         for (int i = 0; i < 3; i++) {
             assertEquals(testList().getX(i), xArr[i], delta);
             assertEquals(testListFun().getX(i), funArr[i]);
-            assertEquals(testListEPiZero().getX(i), ePiZero[i], delta);
+            assertEquals(testListEPiZero().getX(i), ZeroEPi[i], delta);
         }
     }
 
@@ -78,7 +78,7 @@ public class LinkedListTabulatedFunctionTest {
         for (int i = 0; i < 3; i++) {
             assertEquals(testList().getY(i), yArr[i], delta);
             assertEquals(testListFun().getY(i), funArr[i]);
-            assertEquals(testListEPiZero().getY(i), ePiZero[i], delta);
+            assertEquals(testListEPiZero().getY(i), ZeroEPi[i], delta);
         }
     }
 
