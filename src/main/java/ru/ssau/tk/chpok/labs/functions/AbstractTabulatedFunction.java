@@ -35,17 +35,16 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
         }
     }
 
-    Assert.ThrowingRunnable checkLengthIsTheSame(double[] xValues, double[] yValues) {
+    protected static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
         int xV, yV;
         xV = xValues.length;
         yV = yValues.length;
         if (xV != yV) {
             throw new DifferentLengthOfArraysException("Lengths of xValues and yValues are different");
         }
-        return null;
     }
 
-    void checkSorted(double[] xValues) {
+    protected static void checkSorted(double[] xValues) {
         int xV;
         xV = xValues.length;
         for (int i = 0; (i + 1) < xV; i++) {

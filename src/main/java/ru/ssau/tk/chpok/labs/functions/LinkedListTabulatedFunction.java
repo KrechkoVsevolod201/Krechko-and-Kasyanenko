@@ -5,19 +5,20 @@ import ru.ssau.tk.chpok.labs.exceptions.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import static ru.ssau.tk.chpok.labs.functions.AbstractTabulatedFunction.checkSorted;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
     private int count;
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        super.checkLengthIsTheSame(xValues, yValues);
-        super.checkSorted(xValues);
-        //super.checkSorted(yValues);
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
-        } /*else if (yValues.length < 2) {
-            throw new IllegalArgumentException("Array size is smaller than 2");
-        }*/
+        }
+
         this.count = xValues.length;
         for (int i = 0; i < count; i++) {
             this.addNode(xValues[i], yValues[i]);
