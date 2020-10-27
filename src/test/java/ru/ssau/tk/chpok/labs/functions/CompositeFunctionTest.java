@@ -9,7 +9,7 @@ public class CompositeFunctionTest {
     private static final double DELTA = 0.00001;
 
     protected final static double[] xArr = new double[]{0, 1, 2, 3};
-    protected final static double[] yArr = new double[]{4,5,6,7,8};
+    protected final static double[] yArr = new double[]{4, 5, 6, 7};
     protected final static double[] yArr2 = new double[]{0, 1, 8, 27};
     protected final static MathFunction firstTabFunc = new LinkedListTabulatedFunction(xArr, yArr);
     protected final static MathFunction secondTabFunc = new ArrayTabulatedFunction(xArr, yArr2);
