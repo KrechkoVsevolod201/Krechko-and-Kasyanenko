@@ -1,6 +1,5 @@
 package ru.ssau.tk.chpok.labs.functions;
 
-import org.testng.Assert;
 import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.chpok.labs.exceptions.ArrayIsNotSortedException;
 

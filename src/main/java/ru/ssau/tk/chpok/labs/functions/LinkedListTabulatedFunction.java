@@ -1,16 +1,19 @@
 package ru.ssau.tk.chpok.labs.functions;
-
-import org.testng.Assert;
 import ru.ssau.tk.chpok.labs.exceptions.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static ru.ssau.tk.chpok.labs.functions.AbstractTabulatedFunction.checkSorted;
-
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
-    private Node head;
+    private Node head = new Node();
     private int count;
+
+    private static class Node {
+        private Node next;
+        private Node prev;
+        private double x;
+        private double y;
+    }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         checkLengthIsTheSame(xValues, yValues);
@@ -19,7 +22,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             throw new IllegalArgumentException("Array size is smaller than 2");
         }
 
-        //this.count = xValues.length;
         for (int i = 0; i < count; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
@@ -59,7 +61,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node getNode(int index) {
         Node node;
-
         if (index > (count / 2)) {
             node = head.prev;
             for (int i = count - 1; i > 0; i--) {
@@ -172,7 +173,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double extrapolateRight(double x) {
-
         return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
     }
 
@@ -183,9 +183,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (x < floor.x || x > ceiling.x) {
             throw new InterpolationException("x is out of bounds of interpolation");
         }
-
         return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
     }
+
     public static LinkedListTabulatedFunction createTabulatedFunctionDefinedThroughList(double[] valuesX, double[] valuesY) {
         return new LinkedListTabulatedFunction(valuesX, valuesY);
     }
@@ -217,11 +217,4 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         };
     }
 
-
-    private static class Node {
-        private Node next;
-        private Node prev;
-        private double x;
-        private double y;
-    }
 }
