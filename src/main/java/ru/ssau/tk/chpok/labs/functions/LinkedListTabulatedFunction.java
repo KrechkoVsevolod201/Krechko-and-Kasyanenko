@@ -16,11 +16,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        checkLengthIsTheSame(xValues, yValues);
-        checkSorted(xValues);
+
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
         }
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         this.count = xValues.length;
         for (int i = 0; i < count; i++) {
             this.addNode(xValues[i], yValues[i]);

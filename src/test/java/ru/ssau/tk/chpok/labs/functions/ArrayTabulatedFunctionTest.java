@@ -60,7 +60,7 @@ public class ArrayTabulatedFunctionTest {
         final ArrayTabulatedFunction testFunctionArr = new ArrayTabulatedFunction(xArr, yArr);
         assertEquals(testFunction.apply(1.0), -1, ACCURACY);
         assertNotEquals(testFunction.apply(5.0), 1, ACCURACY);
-        assertEquals(testFunction.apply(4.0), 4.0, ACCURACY);
+        assertEquals(testFunction.apply(4.0), 16.0, ACCURACY);
         assertEquals(testFunction.apply(12), 102, ACCURACY);
         assertEquals(testFunctionArr.apply(1.0), 1, ACCURACY);
         assertNotEquals(testFunctionArr.apply(5.0), 1, ACCURACY);
@@ -125,21 +125,21 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testIndexOfX() {
         assertEquals(function().indexOfX(2), 0);
-        assertEquals(function().indexOfX(3), 0);
-        assertEquals(function().indexOfX(4), 0);
-        assertEquals(function1().indexOfX(2), 0);
-        assertEquals(function1().indexOfX(3), 0);
-        assertEquals(function1().indexOfX(4), 0);
+        assertEquals(function().indexOfX(3), 1);
+        assertEquals(function().indexOfX(4), 2);
+        assertEquals(function1().indexOfX(2), 1);
+        assertEquals(function1().indexOfX(3), 2);
+        assertEquals(function1().indexOfX(4), -1);
     }
 
     @Test
     public void testIndexOfY() {
         assertEquals(function().indexOfY(4), 0);
-        assertEquals(function().indexOfY(9), 0);
-        assertEquals(function().indexOfY(16), 0);
-        assertEquals(function1().indexOfY(4), 0);
-        assertEquals(function1().indexOfY(9), 0);
-        assertEquals(function1().indexOfY(16), 0);
+        assertEquals(function().indexOfY(9), 1);
+        assertEquals(function().indexOfY(16), 2);
+        assertEquals(function1().indexOfY(4), 1);
+        assertEquals(function1().indexOfY(9), 2);
+        assertEquals(function1().indexOfY(16), -1);
     }
 
     @Test

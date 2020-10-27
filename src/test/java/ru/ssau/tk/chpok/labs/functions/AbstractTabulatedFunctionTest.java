@@ -10,6 +10,7 @@ public class AbstractTabulatedFunctionTest {
     MockTabulatedFunction newMock = new MockTabulatedFunction();
     private static final double delta = 0.001;
     protected final double[] xArr = new double[]{1d, 6d, 7d};
+    protected final double[] yArr = new double[]{2d, 6d, 7d};
     protected final double[] xArrAnotherWrong = new double[]{81d, 36d, 49d};
     protected final double[] xArrLong = new double[]{1d, 6d, 7d, 8d, 9d};
     protected final double[] xArrWrong = new double[]{1d, 36d, 64d, 49d,  81d};
@@ -99,15 +100,16 @@ public class AbstractTabulatedFunctionTest {
 
     @Test
     public void testCheckLengthIsTheSame(){
-
         assertThrows(DifferentLengthOfArraysException.class, () -> newMock.checkLengthIsTheSame(xArr,xArrLong));
         assertThrows(DifferentLengthOfArraysException.class, () -> newMock.checkLengthIsTheSame(xArrLong,xArr));
+        AbstractTabulatedFunction.checkLengthIsTheSame(xArr,yArr);
     }
 
     @Test
     public void testCheckSorted(){
         assertThrows(ArrayIsNotSortedException.class, () -> newMock.checkSorted(xArrWrong));
         assertThrows(ArrayIsNotSortedException.class, () -> newMock.checkSorted(xArrAnotherWrong));
+        AbstractTabulatedFunction.checkSorted(xArr);
     }
 
 }

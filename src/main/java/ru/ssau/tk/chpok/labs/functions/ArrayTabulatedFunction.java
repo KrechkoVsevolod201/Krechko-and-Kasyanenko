@@ -60,8 +60,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfX(double x) {
-        for (int i = 0; i != count; i++) {
-            if ((xValues[i] - x) <= 0) {
+        for (int i = 0; i < count; i++) {
+            if (xValues[i] == x) {
                 return i;
             }
         }
@@ -70,8 +70,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public int indexOfY(double y) {
-        for (int i = 0; i != count; i++) {
-            if ((yValues[i] - y) <= 0) {
+        for (int i = 0; i < count; i++) {
+            if (yValues[i] == y) {
                 return i;
             }
         }
