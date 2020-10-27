@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
-    private Node head = new Node();
+    private Node head;
     private int count;
 
     private static class Node {
@@ -21,7 +21,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (xValues.length < 2) {
             throw new IllegalArgumentException("Array size is smaller than 2");
         }
-
+        this.count = xValues.length;
         for (int i = 0; i < count; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
@@ -41,7 +41,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private void addNode(double x, double y) {
         Node newNode = new Node();
-        this.count = ++this.count;
+        //count++;
         if (head == null) {
             head = newNode;
             newNode.next = newNode;
