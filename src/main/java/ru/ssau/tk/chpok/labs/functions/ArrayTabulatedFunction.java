@@ -13,8 +13,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     private final int count;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        checkLengthIsTheSame(xValues, yValues);
-        checkSorted(xValues);
+        AbstractTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
+        AbstractTabulatedFunction.checkSorted(xValues);
         if (xValues.length < 2) {
             throw new IllegalArgumentException("length of the array is less than 2");
         }

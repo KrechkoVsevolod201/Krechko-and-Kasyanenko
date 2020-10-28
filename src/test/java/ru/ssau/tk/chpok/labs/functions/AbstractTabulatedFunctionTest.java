@@ -12,7 +12,7 @@ public class AbstractTabulatedFunctionTest {
     protected final double[] xArr = new double[]{1d, 6d, 7d};
     protected final double[] yArr = new double[]{2d, 6d, 7d};
     protected final double[] xArrAnotherWrong = new double[]{81d, 36d, 49d};
-    protected final double[] xArrLong = new double[]{1d, 6d, 7d, 8d, 9d};
+    protected final double[] xArrLong = new double[]{-1d, 0d, 6d, 7d, 8d, 9d};
     protected final double[] xArrWrong = new double[]{1d, 36d, 64d, 49d,  81d};
 
     private ArrayTabulatedFunction function() {
