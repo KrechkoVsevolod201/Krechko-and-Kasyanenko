@@ -100,15 +100,15 @@ public class AbstractTabulatedFunctionTest {
 
     @Test
     public void testCheckLengthIsTheSame(){
-        assertThrows(DifferentLengthOfArraysException.class, () -> newMock.checkLengthIsTheSame(xArr,xArrLong));
-        assertThrows(DifferentLengthOfArraysException.class, () -> newMock.checkLengthIsTheSame(xArrLong,xArr));
+        assertThrows(DifferentLengthOfArraysException.class, () -> AbstractTabulatedFunction.checkLengthIsTheSame(xArr,xArrLong));
+        assertThrows(DifferentLengthOfArraysException.class, () -> AbstractTabulatedFunction.checkLengthIsTheSame(xArrLong,xArr));
         AbstractTabulatedFunction.checkLengthIsTheSame(xArr,yArr);
     }
 
     @Test
     public void testCheckSorted(){
-        assertThrows(ArrayIsNotSortedException.class, () -> newMock.checkSorted(xArrWrong));
-        assertThrows(ArrayIsNotSortedException.class, () -> newMock.checkSorted(xArrAnotherWrong));
+        assertThrows(ArrayIsNotSortedException.class, () -> AbstractTabulatedFunction.checkSorted(xArrWrong));
+        assertThrows(ArrayIsNotSortedException.class, () -> AbstractTabulatedFunction.checkSorted(xArrAnotherWrong));
         AbstractTabulatedFunction.checkSorted(xArr);
     }
 
