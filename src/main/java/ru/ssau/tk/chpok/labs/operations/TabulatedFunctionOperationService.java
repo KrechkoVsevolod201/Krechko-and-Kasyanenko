@@ -10,7 +10,15 @@ import ru.ssau.tk.chpok.labs.functions.factory.TabulatedFunctionFactory;
 public class TabulatedFunctionOperationService {
     private TabulatedFunctionFactory factory;
 
-    public TabulatedFunctionOperationService(LinkedListTabulatedFunctionFactory linkedListTabulatedFunctionFactory) {
+    public TabulatedFunctionOperationService(TabulatedFunctionFactory factory) {
+        this.factory = factory;
+    }
+
+    public TabulatedFunctionOperationService(LinkedListTabulatedFunctionFactory factory) {
+        this.factory = factory;
+    }
+
+    public TabulatedFunctionOperationService() {
         this.factory = new ArrayTabulatedFunctionFactory();
     }
 
@@ -61,5 +69,12 @@ public class TabulatedFunctionOperationService {
 
     public TabulatedFunction subtract(TabulatedFunction a, TabulatedFunction b) {
         return doOperation(a, b, (u, v) -> u - v);
+    }
+    public TabulatedFunction multiply(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, ((u, v) -> u * v));
+    }
+
+    public TabulatedFunction division(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, ((u, v) -> u / v));
     }
 }
