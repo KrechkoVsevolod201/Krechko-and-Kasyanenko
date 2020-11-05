@@ -14,7 +14,7 @@ import static org.testng.Assert.*;
 public class TabulatedFunctionOperationServiceTest {
     private final double[] valuesX = new double[]{-27, -8, -1, 0, 1, 8, 27};
     private final double[] valuesY = new double[]{-3, -2, -1, -0, 1, 2, 3};
-    private final double[] valuesYForList = new double[]{10, 20, 30, 40, 50, 60, 70};
+    private final double[] valuesYForList = new double[]{100, 200, 300, 400, 500, 600, 700};
     TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
     private final double DELTA = 0.001;
 
