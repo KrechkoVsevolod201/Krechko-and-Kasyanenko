@@ -2,8 +2,10 @@ package ru.ssau.tk.chpok.labs.functions;
 
 import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.chpok.labs.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.chpok.labs.operations.TabulatedFunctionOperationService;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction {
+public abstract class AbstractTabulatedFunction extends Object implements TabulatedFunction {
+    protected int count;
 
     protected abstract int floorIndexOfX(double x);
 
@@ -51,5 +53,22 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
                 throw new ArrayIsNotSortedException("Array is not sorted");
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(this.getClass().getSimpleName());
+        stringBuilder.append("; size = ");
+        stringBuilder.append(this.count);
+        for (Point currentPoint : TabulatedFunctionOperationService.asPoints(this)) {
+            stringBuilder.append("\n");
+            stringBuilder.append('[');
+            stringBuilder.append(currentPoint.x);
+            stringBuilder.append(',');
+            stringBuilder.append(' ');
+            stringBuilder.append(currentPoint.y);
+            stringBuilder.append("]");
+        }
+        return (stringBuilder.toString());
     }
 }
