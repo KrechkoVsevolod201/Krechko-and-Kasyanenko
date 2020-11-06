@@ -15,17 +15,17 @@ public class TabulatedFunctionOperationServiceTest {
     private final double[] valuesX = new double[]{-27, -8, -1, 0, 1, 8, 27};
     private final double[] valuesY = new double[]{-3, -2, -1, -0, 1, 2, 3};
     private final double[] valuesYForList = new double[]{100, 200, 300, 400, 500, 600, 700};
-    TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
+    private static final TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
     private static final TabulatedFunctionOperationService firstOperator = new TabulatedFunctionOperationService();
     private static final TabulatedFunctionOperationService secondOperator = new TabulatedFunctionOperationService(new ArrayTabulatedFunctionFactory());
     private static final TabulatedFunctionOperationService thirdOperator = new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
     private final double DELTA = 0.001;
 
-    ArrayTabulatedFunction getTestArray() {
+    public ArrayTabulatedFunction getTestArray() {
         return new ArrayTabulatedFunction(valuesX, valuesY);
     }
 
-    LinkedListTabulatedFunction getTestList() {
+    public LinkedListTabulatedFunction getTestList() {
         return new LinkedListTabulatedFunction(valuesX, valuesYForList);
     }
 
