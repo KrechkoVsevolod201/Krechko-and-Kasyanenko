@@ -16,6 +16,9 @@ public class TabulatedFunctionOperationServiceTest {
     private final double[] valuesY = new double[]{-3, -2, -1, -0, 1, 2, 3};
     private final double[] valuesYForList = new double[]{100, 200, 300, 400, 500, 600, 700};
     TabulatedFunctionOperationService service = new TabulatedFunctionOperationService();
+    private static final TabulatedFunctionOperationService firstOperator = new TabulatedFunctionOperationService();
+    private static final TabulatedFunctionOperationService secondOperator = new TabulatedFunctionOperationService(new ArrayTabulatedFunctionFactory());
+    private static final TabulatedFunctionOperationService thirdOperator = new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory());
     private final double DELTA = 0.001;
 
     ArrayTabulatedFunction getTestArray() {
@@ -51,12 +54,21 @@ public class TabulatedFunctionOperationServiceTest {
     public void testGetFactory() {
         assertTrue(service.getFactory() instanceof ArrayTabulatedFunctionFactory);
         assertTrue(new TabulatedFunctionOperationService(new LinkedListTabulatedFunctionFactory()).getFactory() instanceof LinkedListTabulatedFunctionFactory);
+        assertTrue(firstOperator.getFactory() instanceof ArrayTabulatedFunctionFactory);
+        assertTrue(secondOperator.getFactory() instanceof ArrayTabulatedFunctionFactory);
+        assertTrue(thirdOperator.getFactory() instanceof LinkedListTabulatedFunctionFactory);
     }
 
     @Test
     public void testSetFactory() {
         service.setFactory(new LinkedListTabulatedFunctionFactory());
         assertTrue(service.getFactory() instanceof LinkedListTabulatedFunctionFactory);
+        firstOperator.setFactory(new LinkedListTabulatedFunctionFactory());
+        secondOperator.setFactory(new LinkedListTabulatedFunctionFactory());
+        thirdOperator.setFactory(new ArrayTabulatedFunctionFactory());
+        assertTrue(firstOperator.getFactory() instanceof LinkedListTabulatedFunctionFactory);
+        assertTrue(secondOperator.getFactory() instanceof LinkedListTabulatedFunctionFactory);
+        assertTrue(thirdOperator.getFactory() instanceof ArrayTabulatedFunctionFactory);
     }
 
     @Test

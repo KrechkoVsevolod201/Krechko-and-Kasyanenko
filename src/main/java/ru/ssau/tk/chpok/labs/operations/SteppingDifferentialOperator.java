@@ -2,12 +2,10 @@ package ru.ssau.tk.chpok.labs.operations;
 
 import ru.ssau.tk.chpok.labs.functions.MathFunction;
 
-public abstract class SteppingDifferentialOperator implements DifferentialOperator{
+public abstract class SteppingDifferentialOperator implements DifferentialOperator<MathFunction>{
     protected double step;
-    private final double nan = Double.NaN, infinityPlus = Double.POSITIVE_INFINITY, infinityMinus = Double.NEGATIVE_INFINITY, zero = 0;
-
     public SteppingDifferentialOperator (double step){
-        if (step == nan || step == infinityPlus || step == infinityMinus || step <= zero){
+        if (step == Double.NaN || step == Double.POSITIVE_INFINITY || step == Double.NEGATIVE_INFINITY || step <= 0){
             throw new IllegalArgumentException("You have the wrong argument, BOY NEXT DOOR");
         }
         this.step = step;
