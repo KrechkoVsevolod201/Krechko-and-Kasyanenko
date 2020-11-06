@@ -5,7 +5,7 @@ import ru.ssau.tk.chpok.labs.functions.MathFunction;
 public abstract class SteppingDifferentialOperator implements DifferentialOperator<MathFunction>{
     protected double step;
     public SteppingDifferentialOperator (double step){
-        if (step == Double.NaN || step == Double.POSITIVE_INFINITY || step == Double.NEGATIVE_INFINITY || step <= 0){
+        if (Double.isNaN(step) || step == Double.POSITIVE_INFINITY || step == Double.NEGATIVE_INFINITY || step <= 0){
             throw new IllegalArgumentException("You have the wrong argument, BOY NEXT DOOR");
         }
         this.step = step;
