@@ -2,6 +2,7 @@ package ru.ssau.tk.chpok.labs.io;
 import ru.ssau.tk.chpok.labs.functions.Point;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 import ru.ssau.tk.chpok.labs.functions.factory.TabulatedFunctionFactory;
+import ru.ssau.tk.chpok.labs.operations.TabulatedFunctionOperationService;
 
 import java.io.*;
 
@@ -17,5 +18,14 @@ final class FunctionsIO {
             printWriter.printf("%f %f\n", point.x, point.y);
         }
         printWriter.flush();
+    }
+    static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
+        DataOutputStream out = new DataOutputStream(outputStream);
+        out.writeInt(function.getCount());
+        for (Point currentPoint : TabulatedFunctionOperationService.asPoints(function)) {
+            out.writeDouble(currentPoint.x);
+            out.writeDouble(currentPoint.y);
+        }
+        out.flush();
     }
 }
