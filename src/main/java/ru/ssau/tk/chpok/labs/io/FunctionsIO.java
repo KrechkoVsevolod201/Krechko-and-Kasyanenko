@@ -5,9 +5,13 @@ import ru.ssau.tk.chpok.labs.functions.factory.TabulatedFunctionFactory;
 import ru.ssau.tk.chpok.labs.operations.TabulatedFunctionOperationService;
 
 import java.io.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 final class FunctionsIO {
-    static void readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) {
+
+    private FunctionsIO() {
         throw new UnsupportedOperationException("Oh no, boy, I think that is wrong operator");
     }
     static void  writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function){
@@ -27,5 +31,35 @@ final class FunctionsIO {
             out.writeDouble(currentPoint.y);
         }
         out.flush();
+    }
+    public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
+        int count = Integer.parseInt(reader.readLine());
+
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.forLanguageTag("ru"));
+        for (int i = 0; i < count; i++) {
+            String line = reader.readLine();
+            String[] splitLine = line.split(" ");
+            try {
+                xValues[i] = numberFormat.parse(splitLine[0]).doubleValue();
+                yValues[i] = numberFormat.parse(splitLine[1]).doubleValue();
+            } catch (ParseException eParse) {
+                throw new IOException(eParse);
+            }
+        }
+
+        return factory.create(xValues, yValues);
+    }
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
+        DataInputStream in = new DataInputStream(inputStream);
+        int count = in.readInt();
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+        for (int i = 0; i < count; i++) {
+            xValues[i] = in.readDouble();
+            yValues[i] = in.readDouble();
+        }
+        return factory.create(xValues, yValues);
     }
 }
