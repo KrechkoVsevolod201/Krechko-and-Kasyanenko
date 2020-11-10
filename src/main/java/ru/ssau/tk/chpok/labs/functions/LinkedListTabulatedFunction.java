@@ -3,8 +3,10 @@ import ru.ssau.tk.chpok.labs.exceptions.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.io.Serializable;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable{
+    private static final long serialVersionUID = 6798102166110759419L;
     private Node head;
     private int count;
 
