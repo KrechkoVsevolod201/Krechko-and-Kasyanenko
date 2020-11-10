@@ -6,11 +6,12 @@ import java.util.NoSuchElementException;
 import java.io.Serializable;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable{
-    private static final long serialVersionUID = 6798102166110759419L;
+    private static final long serialVersionUID = -8182024985544529148L;
     private Node head;
     private int count;
 
-    private static class Node {
+    private static class Node implements Serializable{
+        private static final long serialVersionUID = -7758844102361216441L;
         private Node next;
         private Node prev;
         private double x;
@@ -193,8 +194,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return new LinkedListTabulatedFunction(valuesX, valuesY);
     }
 
-    public static LinkedListTabulatedFunction createTabulatedFunctionDefinedThroughMathFunction(MathFunction source, double xFrom, double xTo, int count) {
-        return new LinkedListTabulatedFunction(source, xFrom, xTo, count);
+    public static void createTabulatedFunctionDefinedThroughMathFunction(MathFunction source, double xFrom, double xTo, int count) {
+        new LinkedListTabulatedFunction(source, xFrom, xTo, count);
     }
 
 

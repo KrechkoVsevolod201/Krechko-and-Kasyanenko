@@ -31,8 +31,8 @@ public class ArrayTabulatedFunctionSerialization {
             System.out.println(resultArray.toString());
             System.out.println(resultArray1.toString());
             System.out.println(resultArray2.toString());
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException err) {
+            err.printStackTrace();
         }
     }
 }
