@@ -2,7 +2,7 @@ package ru.ssau.tk.chpok.labs.operations;
 
 import ru.ssau.tk.chpok.labs.functions.MathFunction;
 
-public class LeftSteppingDifferentialOperator extends SteppingDifferentialOperator{
+public class LeftSteppingDifferentialOperator extends SteppingDifferentialOperator {
 
     public LeftSteppingDifferentialOperator(double step) {
         super(step);

@@ -1,12 +1,16 @@
 package ru.ssau.tk.chpok.labs.exceptions;
 
-public class DifferentLengthOfArraysException extends RuntimeException {
+import java.io.Serializable;
 
-    public DifferentLengthOfArraysException (){
+public class DifferentLengthOfArraysException extends RuntimeException implements Serializable {
+
+    private static final long serialVersionUID = -1945375361267455276L;
+
+    public DifferentLengthOfArraysException() {
         super();
     }
 
-    public DifferentLengthOfArraysException (String comment){
+    public DifferentLengthOfArraysException(String comment) {
         super(comment);
     }
 }

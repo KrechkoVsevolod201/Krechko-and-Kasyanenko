@@ -11,10 +11,10 @@ public class SinFunctionTest {
     @Test
     public void testApply() {
         SinFunction testFunction = new SinFunction();
-        assertEquals(testFunction.apply(0), 0,DELTA);
-        assertEquals(testFunction.apply(-Math.PI / 4), -Math.sqrt(2) / 2,DELTA);
-        assertNotEquals(testFunction.apply(2.0), 1,DELTA);
-        assertNotEquals(testFunction.apply(2.0), 4.0,DELTA);
-        assertNotEquals(testFunction.apply(12), 144,DELTA);
+        assertEquals(testFunction.apply(0), 0, DELTA);
+        assertEquals(testFunction.apply(-Math.PI / 4), -Math.sqrt(2) / 2, DELTA);
+        assertNotEquals(testFunction.apply(2.0), 1, DELTA);
+        assertNotEquals(testFunction.apply(2.0), 4.0, DELTA);
+        assertNotEquals(testFunction.apply(12), 144, DELTA);
     }
 }

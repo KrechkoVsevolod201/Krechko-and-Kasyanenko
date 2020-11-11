@@ -1,4 +1,5 @@
 package ru.ssau.tk.chpok.labs.io;
+
 import ru.ssau.tk.chpok.labs.functions.Point;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 import ru.ssau.tk.chpok.labs.functions.factory.TabulatedFunctionFactory;
@@ -14,7 +15,8 @@ final class FunctionsIO {
     private FunctionsIO() {
         throw new UnsupportedOperationException("Oh no, boy, I think that is wrong operator");
     }
-    static void  writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function){
+
+    static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
         PrintWriter printWriter = new PrintWriter(writer);
         printWriter.println(function.getCount());
         int i = 0;
@@ -23,6 +25,7 @@ final class FunctionsIO {
         }
         printWriter.flush();
     }
+
     static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
         DataOutputStream out = new DataOutputStream(outputStream);
         out.writeInt(function.getCount());
@@ -32,6 +35,7 @@ final class FunctionsIO {
         }
         out.flush();
     }
+
     public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
         int count = Integer.parseInt(reader.readLine());
 
@@ -51,6 +55,7 @@ final class FunctionsIO {
 
         return factory.create(xValues, yValues);
     }
+
     public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
         DataInputStream in = new DataInputStream(inputStream);
         int count = in.readInt();
@@ -62,6 +67,7 @@ final class FunctionsIO {
         }
         return factory.create(xValues, yValues);
     }
+
     public static void serialize(BufferedOutputStream stream, TabulatedFunction function) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(stream);
         out.writeObject(function);

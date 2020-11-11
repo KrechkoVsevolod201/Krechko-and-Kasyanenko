@@ -3,7 +3,9 @@ package ru.ssau.tk.chpok.labs.functions;
 import org.testng.annotations.Test;
 import ru.ssau.tk.chpok.labs.exceptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
+
 import java.util.NoSuchElementException;
+
 import static org.testng.Assert.*;
 import static ru.ssau.tk.chpok.labs.functions.ArrayTabulatedFunction.createTabulatedFunctionDefinedThroughArray;
 

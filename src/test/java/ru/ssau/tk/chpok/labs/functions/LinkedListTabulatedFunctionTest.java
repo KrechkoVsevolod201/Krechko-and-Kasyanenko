@@ -7,6 +7,7 @@ import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 import static org.testng.Assert.*;
 
 public class LinkedListTabulatedFunctionTest {
@@ -14,7 +15,7 @@ public class LinkedListTabulatedFunctionTest {
     protected final double[] xArr = new double[]{1d, 6d, 7d};
     protected final double[] yArr = new double[]{1d, 36d, 49d};
 
-    protected final double[] funArr = new double[]{Double.NEGATIVE_INFINITY, 1d, Double.POSITIVE_INFINITY, };
+    protected final double[] funArr = new double[]{Double.NEGATIVE_INFINITY, 1d, Double.POSITIVE_INFINITY,};
     protected final double[] oneEPi = new double[]{1d, Math.E, Math.PI};
     private final MathFunction sqrtFunc = new SqrtFunction();
     private static final double delta = 0.001;
@@ -30,6 +31,7 @@ public class LinkedListTabulatedFunctionTest {
     public LinkedListTabulatedFunction testListEPiZero() {
         return new LinkedListTabulatedFunction(oneEPi, oneEPi);
     }
+
     @Test
     public void testConstructor() {
         assertThrows(IllegalArgumentException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughList(new double[]{1}, new double[]{1}));
@@ -44,6 +46,7 @@ public class LinkedListTabulatedFunctionTest {
         assertThrows(IllegalArgumentException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughMathFunction(sqrtFunc, 5, 6, 1));
         assertThrows(IllegalArgumentException.class, () -> LinkedListTabulatedFunction.createTabulatedFunctionDefinedThroughMathFunction(sqrtFunc, 5, 5, -1));
     }
+
     @Test
     public void testApply() {
         final LinkedListTabulatedFunction testFunctionArr = new LinkedListTabulatedFunction(xArr, yArr);

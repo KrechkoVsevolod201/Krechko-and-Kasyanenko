@@ -11,9 +11,9 @@ public class SqrFunctionTest {
     @Test
     public void testApply() {
         MathFunction testFunction = new SqrFunction();
-        assertEquals(testFunction.apply(1.0), 1,DELTA);
-        assertNotEquals(testFunction.apply(2.0), 1,DELTA);
-        assertEquals(testFunction.apply(-2.0), 4.0,DELTA);
-        assertEquals(testFunction.apply(12), 144,DELTA);
+        assertEquals(testFunction.apply(1.0), 1, DELTA);
+        assertNotEquals(testFunction.apply(2.0), 1, DELTA);
+        assertEquals(testFunction.apply(-2.0), 4.0, DELTA);
+        assertEquals(testFunction.apply(12), 144, DELTA);
     }
 }

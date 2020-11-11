@@ -13,7 +13,7 @@ import static org.testng.Assert.*;
 public class TabulatedDifferentialOperatorTest {
     private static final TabulatedFunctionFactory arrayTabulatedFunctionFactory = new ArrayTabulatedFunctionFactory();
     private static final TabulatedFunctionFactory linkedListTabulatedFunctionFactory = new LinkedListTabulatedFunctionFactory();
-    private static final double[] xValues = new double[]{ -3., 5., 7., 9.};
+    private static final double[] xValues = new double[]{-3., 5., 7., 9.};
     private static final double[] yValues = new double[]{9., 25., 49., 81.};
     private static final double[] derivedYValues = new double[]{2., 12., 16., 16., 3., 5., 5.};
     private static final double[] newXValues = new double[]{4., 9., 16., 25., 36.};

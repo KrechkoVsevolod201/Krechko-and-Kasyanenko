@@ -1,16 +1,17 @@
 package ru.ssau.tk.chpok.labs.functions;
+
 import ru.ssau.tk.chpok.labs.exceptions.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.io.Serializable;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
     private static final long serialVersionUID = -8182024985544529148L;
     private Node head;
     private int count;
 
-    private static class Node implements Serializable{
+    private static class Node implements Serializable {
         private static final long serialVersionUID = -7758844102361216441L;
         private Node next;
         private Node prev;

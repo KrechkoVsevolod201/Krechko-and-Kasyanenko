@@ -1,11 +1,13 @@
 package ru.ssau.tk.chpok.labs.functions;
+
 import ru.ssau.tk.chpok.labs.exceptions.InterpolationException;
+
 import java.util.NoSuchElementException;
 import java.util.Arrays;
 import java.io.Serializable;
 import java.util.Iterator;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction  implements Serializable{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
     private static final long serialVersionUID = 1993252187784624486L;
     private final double[] xValues;
     private final double[] yValues;

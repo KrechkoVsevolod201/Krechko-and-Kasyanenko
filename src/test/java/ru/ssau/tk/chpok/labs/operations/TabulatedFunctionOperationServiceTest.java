@@ -76,7 +76,7 @@ public class TabulatedFunctionOperationServiceTest {
 
     @Test
     public void testSum() {
-        TabulatedFunction arrayTestSumOfArrays =arrayService.sum(arrayFunction, arrayFunction);
+        TabulatedFunction arrayTestSumOfArrays = arrayService.sum(arrayFunction, arrayFunction);
         TabulatedFunction listTestSumOfArrays = listService.sum(arrayFunction, arrayFunction);
         int i = 0;
         assertTrue(arrayTestSumOfArrays instanceof ArrayTabulatedFunction);

@@ -11,9 +11,9 @@ public class IdentityFunctionTest {
     @Test
     public void testApply() {
         MathFunction testFunction = new IdentityFunction();
-        assertEquals(testFunction.apply(1.0), 1,DELTA);
-        assertNotEquals(testFunction.apply(2.0), 1,DELTA);
-        assertEquals(testFunction.apply(128.365), 128.365,DELTA);
-        assertEquals(testFunction.apply(-666.999), -666.999,DELTA);
+        assertEquals(testFunction.apply(1.0), 1, DELTA);
+        assertNotEquals(testFunction.apply(2.0), 1, DELTA);
+        assertEquals(testFunction.apply(128.365), 128.365, DELTA);
+        assertEquals(testFunction.apply(-666.999), -666.999, DELTA);
     }
 }

@@ -21,10 +21,10 @@ public class CompositeFunctionTest {
         MathFunction sqrt = new SqrtFunction();
         MathFunction sin = new SinFunction();
         CompositeFunction testFunction = new CompositeFunction(sqr, sqrt);
-        assertEquals(testFunction.apply(0), 0,DELTA);
-        assertEquals(testFunction.apply(-1.0), 1.0,DELTA);
-        assertNotEquals(testFunction.apply(2.0), 69,DELTA);
-        assertNotEquals(testFunction.apply(12), 144,DELTA);
+        assertEquals(testFunction.apply(0), 0, DELTA);
+        assertEquals(testFunction.apply(-1.0), 1.0, DELTA);
+        assertNotEquals(testFunction.apply(2.0), 69, DELTA);
+        assertNotEquals(testFunction.apply(12), 144, DELTA);
 
 
         MathFunction sinSqr = new CompositeFunction(sin, sqr);
@@ -33,12 +33,12 @@ public class CompositeFunctionTest {
         MathFunction sinSqrt = new CompositeFunction(sin, sqrt);
 
         assertEquals(sinSqr.apply(0), 0, 0.001);
-        assertEquals(sinSqr.apply((Math.PI / 2) *(-1)), 1, 0.001);
+        assertEquals(sinSqr.apply((Math.PI / 2) * (-1)), 1, 0.001);
         assertEquals(sqrSqrt.apply(5), 5, 0.001);
         assertEquals(doubleSqr.apply(2), 16, 0.001);
         assertEquals(sinSqrt.apply(0), 0, 0.001);
-        assertEquals(firstTabFunc.andThen(secondTabFunc).andThen(sqr).apply(2),7056, 0.001);
-        assertEquals(firstTabFunc.andThen(secondTabFunc).andThen(sqr).apply(1),4225, 0.001);
-        assertEquals(firstTabFunc.andThen(secondTabFunc).andThen(sqr).apply(0),2116, 0.001);
+        assertEquals(firstTabFunc.andThen(secondTabFunc).andThen(sqr).apply(2), 7056, 0.001);
+        assertEquals(firstTabFunc.andThen(secondTabFunc).andThen(sqr).apply(1), 4225, 0.001);
+        assertEquals(firstTabFunc.andThen(secondTabFunc).andThen(sqr).apply(0), 2116, 0.001);
     }
 }
