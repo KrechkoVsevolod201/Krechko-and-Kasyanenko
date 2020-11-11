@@ -12,11 +12,11 @@ import java.util.Locale;
 
 final class FunctionsIO {
 
-    private FunctionsIO() {
+    public FunctionsIO() {
         throw new UnsupportedOperationException("Oh no, boy, I think that is wrong operator");
     }
 
-    static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
+    public static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
         PrintWriter printWriter = new PrintWriter(writer);
         printWriter.println(function.getCount());
         int i = 0;
@@ -26,10 +26,10 @@ final class FunctionsIO {
         printWriter.flush();
     }
 
-    static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
+    public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
         DataOutputStream out = new DataOutputStream(outputStream);
         out.writeInt(function.getCount());
-        for (Point currentPoint : TabulatedFunctionOperationService.asPoints(function)) {
+        for (Point currentPoint : function) {
             out.writeDouble(currentPoint.x);
             out.writeDouble(currentPoint.y);
         }
