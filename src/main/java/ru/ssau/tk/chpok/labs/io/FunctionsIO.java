@@ -3,16 +3,15 @@ package ru.ssau.tk.chpok.labs.io;
 import ru.ssau.tk.chpok.labs.functions.Point;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 import ru.ssau.tk.chpok.labs.functions.factory.TabulatedFunctionFactory;
-import ru.ssau.tk.chpok.labs.operations.TabulatedFunctionOperationService;
 
 import java.io.*;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
-final class FunctionsIO {
+public final class FunctionsIO {
 
-    public FunctionsIO() {
+    private FunctionsIO() {
         throw new UnsupportedOperationException("Oh no, boy, I think that is wrong operator");
     }
 
