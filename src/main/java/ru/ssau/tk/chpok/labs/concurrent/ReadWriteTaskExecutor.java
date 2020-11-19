@@ -5,24 +5,28 @@ import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 import ru.ssau.tk.chpok.labs.functions.ZeroFunction;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class ReadWriteTaskExecutor {
     public static void main(String[] args) {
-        TabulatedFunction tabulatedFunction = new LinkedListTabulatedFunction(new ZeroFunction(), 1, 10, 10);
-        List<Thread> threadList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Thread newThread = new Thread(new ReadWriteTask(tabulatedFunction));
-            threadList.add(newThread);
+        TabulatedFunction function = new LinkedListTabulatedFunction(new ZeroFunction(), 1, 10, 10);
+        ArrayList<Thread> list = new ArrayList<>();
+        int countThread = 20;
+        CountDownLatch countDownLatch = new CountDownLatch(countThread);
+        ReadWriteTask myTask = new ReadWriteTask(function, countDownLatch::countDown);
+        for (int i = 0; i < countThread; i++) {
+            list.add(new Thread(myTask));
         }
-        for (Thread currentTread : threadList) {
-            currentTread.start();
+
+        for (Thread thread : list) {
+            thread.start();
         }
         try {
-            Thread.sleep(1000);
+            countDownLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(tabulatedFunction);
+        System.out.println(function.toString());
+
     }
 }

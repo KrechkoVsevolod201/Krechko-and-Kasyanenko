@@ -4,13 +4,17 @@ import ru.ssau.tk.chpok.labs.functions.ConstantFunction;
 import ru.ssau.tk.chpok.labs.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 
+import java.util.concurrent.CountDownLatch;
+
 
 public class AddingMultiplyingTaskExecutor {
-    public static void main(String[] args) {
-        TabulatedFunction function = new LinkedListTabulatedFunction(new ConstantFunction(2), 1, 100, 2);
+    public static void main(String[] args) throws InterruptedException {
+        TabulatedFunction function = new LinkedListTabulatedFunction(new ConstantFunction(2), 1, 100, 100);
 
-        AddingTask addingTask = new AddingTask(function);
-        MultiplyingTask multiplyingTask = new MultiplyingTask(function);
+        CountDownLatch countDownLatch = new CountDownLatch(3);
+
+        AddingTask addingTask = new AddingTask(function, countDownLatch::countDown);
+        MultiplyingTask multiplyingTask = new MultiplyingTask(function, countDownLatch::countDown);
 
         Thread thread1 = new Thread(multiplyingTask);
         thread1.start();
@@ -19,11 +23,7 @@ public class AddingMultiplyingTaskExecutor {
         Thread thread3 = new Thread(addingTask);
         thread3.start();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        countDownLatch.await();
 
         System.out.println(function.toString());
     }

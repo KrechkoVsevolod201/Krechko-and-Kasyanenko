@@ -3,10 +3,16 @@ package ru.ssau.tk.chpok.labs.concurrent;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 
 public class MultiplyingTask implements Runnable{
-    private final TabulatedFunction tabulatedFunction;
+    final TabulatedFunction tabulatedFunction;
+    Runnable postRunAction;
 
-    public MultiplyingTask(TabulatedFunction tabulatedFunction) {
-        this.tabulatedFunction = tabulatedFunction;
+    public MultiplyingTask(TabulatedFunction func) {
+        this.tabulatedFunction = func;
+    }
+
+    public MultiplyingTask(TabulatedFunction func, Runnable postRunAction) {
+        this.tabulatedFunction = func;
+        this.postRunAction = postRunAction;
     }
 
     public void run() {

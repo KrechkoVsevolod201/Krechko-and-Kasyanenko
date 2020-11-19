@@ -3,10 +3,16 @@ package ru.ssau.tk.chpok.labs.concurrent;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 
 public class ReadWriteTask implements Runnable {
-    private final TabulatedFunction tabulatedFunction;
+    final TabulatedFunction tabulatedFunction;
+    Runnable postRunAction;
 
-    public ReadWriteTask(TabulatedFunction tabulatedFunction) {
-        this.tabulatedFunction = tabulatedFunction;
+    public ReadWriteTask(TabulatedFunction function) {
+        this.tabulatedFunction = function;
+    }
+
+    public ReadWriteTask(TabulatedFunction function, Runnable postRunAction) {
+        this.tabulatedFunction = function;
+        this.postRunAction = postRunAction;
     }
 
     @Override
