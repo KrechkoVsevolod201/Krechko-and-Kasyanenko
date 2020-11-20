@@ -3,33 +3,27 @@ package ru.ssau.tk.chpok.labs.concurrent;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 
 public class AddingTask implements Runnable {
-    final TabulatedFunction function;
-    Runnable postRunAction;
+    private final TabulatedFunction tabulatedFunction;
 
-    public AddingTask(TabulatedFunction func) {
-        this.function = func;
-    }
-
-    public AddingTask(TabulatedFunction func, Runnable postRunAction) {
-        this.function = func;
-        this.postRunAction = postRunAction;
+    public AddingTask(TabulatedFunction tabulatedFunction) {
+        this.tabulatedFunction = tabulatedFunction;
     }
 
     @Override
     public void run() {
         double x;
         double y;
-        for (int i = 0; i < function.getCount(); i++) {
-            x = function.getX(i);
-            synchronized (function) {
-                y = function.getY(i);
-                System.out.printf("%s, i = %d, x = %f, old y = %f \n", Thread.currentThread().getName(), i, x, y);
-                function.setY(i, y + 3);
-                y = function.getY(i);
+        for (int i = 0; i < tabulatedFunction.getCount(); i++) {
+            x = tabulatedFunction.getX(i);
+            synchronized (tabulatedFunction) {
+                y = tabulatedFunction.getY(i);
+                System.out.printf("%s, i = %d, x = %f, old y = %f", Thread.currentThread().getName(), i, x, y);
+                System.out.println();
+                tabulatedFunction.setY(i, y + 3);
+                y = tabulatedFunction.getY(i);
             }
-            System.out.printf("%s, i = %d, x = %f, new y = %f \n", Thread.currentThread().getName(), i, x, y);
+            System.out.printf("%s, i = %d, x = %f, new y = %f", Thread.currentThread().getName(), i, x, y);
+            System.out.println();
         }
-        postRunAction.run();
     }
-
 }

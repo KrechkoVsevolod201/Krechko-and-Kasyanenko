@@ -3,26 +3,28 @@ package ru.ssau.tk.chpok.labs.concurrent;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 
 public class MultiplyingTask implements Runnable{
-    final TabulatedFunction tabulatedFunction;
-    Runnable postRunAction;
+    private final TabulatedFunction tabulatedFunction;
 
-    public MultiplyingTask(TabulatedFunction func) {
-        this.tabulatedFunction = func;
+    public MultiplyingTask(TabulatedFunction tabulatedFunction) {
+        this.tabulatedFunction = tabulatedFunction;
     }
 
-    public MultiplyingTask(TabulatedFunction func, Runnable postRunAction) {
-        this.tabulatedFunction = func;
-        this.postRunAction = postRunAction;
-    }
-
+    @Override
     public void run() {
+        double x;
+        double y;
         for (int i = 0; i < tabulatedFunction.getCount(); i++) {
-            double currentX = tabulatedFunction.getX(i);
-            double currentY = tabulatedFunction.getY(i);
-            System.out.println(Thread.currentThread().getName() + "i =" + i + " x = " + currentX + " old y = " + currentY);
-            tabulatedFunction.setY(i, currentY * 10);
-            currentY = tabulatedFunction.getY(i);
-            System.out.println(Thread.currentThread().getName() + "i =" + i + " x = " + currentX + " new y = " + currentY);
+            x = tabulatedFunction.getX(i);
+            synchronized (tabulatedFunction) {
+                y = tabulatedFunction.getY(i);
+                System.out.printf("%s, i = %d, x = %f, old y = %f", Thread.currentThread().getName(), i, x, y);
+                System.out.println();
+                tabulatedFunction.setY(i, y * 10);
+                y = tabulatedFunction.getY(i);
+            }
+            System.out.printf("%s, i = %d, x = %f, new y = %f", Thread.currentThread().getName(), i, x, y);
+            System.out.println();
+
         }
     }
 }
