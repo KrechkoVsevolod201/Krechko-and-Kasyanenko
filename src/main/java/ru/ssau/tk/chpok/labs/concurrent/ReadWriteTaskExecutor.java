@@ -16,7 +16,7 @@ public class ReadWriteTaskExecutor {
         for (Thread thread: listThread){
             thread.start();
         }
-        Thread.sleep(20000);
+        Thread.sleep(3000);
         System.out.println(linkedListTabulatedFunction.toString());
     }
 }
