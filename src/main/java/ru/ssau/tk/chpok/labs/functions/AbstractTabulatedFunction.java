@@ -5,7 +5,7 @@ import ru.ssau.tk.chpok.labs.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.chpok.labs.operations.TabulatedFunctionOperationService;
 
 public abstract class AbstractTabulatedFunction extends Object implements TabulatedFunction {
-    protected int count;
+    //protected int count;
 
     protected abstract int floorIndexOfX(double x);
 
@@ -19,21 +19,19 @@ public abstract class AbstractTabulatedFunction extends Object implements Tabula
         return (leftY + (x - leftX) * (rightY - leftY) / (rightX - leftX));
     }
 
-    @Override
     public double apply(double x) {
+        int index = indexOfX(x);
+
         if (x < leftBound()) {
             return (extrapolateLeft(x));
         }
-
         if (x > rightBound()) {
             return (extrapolateRight(x));
         }
-
-        if (indexOfX(x) != -1) {
-            return getY(indexOfX(x));
-        } else {
-            return interpolate(x, floorIndexOfX(x));
+        if (index != -1) {
+            return (getY(index));
         }
+        return (interpolate(x, floorIndexOfX(x)));
     }
 
     protected static void checkLengthIsTheSame(double[] xValues, double[] yValues) {

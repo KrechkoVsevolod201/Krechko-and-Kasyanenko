@@ -46,7 +46,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     private void addNode(double x, double y) {
         Node newNode = new Node();
-        //count++;
         if (head == null) {
             head = newNode;
             newNode.next = newNode;
@@ -183,13 +182,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        Node floor = getNode(floorIndex);
-        Node ceiling = floor.next;
-        if (x < floor.x || x > ceiling.x) {
-            throw new InterpolationException("x is out of bounds of interpolation");
+        if (x < head.x || x > head.prev.x) {
+            throw new InterpolationException("X is out of bounds of interpolation");
         }
-        return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
+        return interpolate(x, getNode(floorIndex).x, getNode(floorIndex + 1).x, getNode(floorIndex).y, getNode(floorIndex + 1).y);
     }
+
 
     public static LinkedListTabulatedFunction createTabulatedFunctionDefinedThroughList(double[] valuesX, double[] valuesY) {
         return new LinkedListTabulatedFunction(valuesX, valuesY);

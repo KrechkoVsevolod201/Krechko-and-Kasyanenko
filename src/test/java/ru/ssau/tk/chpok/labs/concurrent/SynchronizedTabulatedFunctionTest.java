@@ -8,7 +8,7 @@ import java.util.Iterator;
 import static org.testng.Assert.*;
 
 public class SynchronizedTabulatedFunctionTest {
-    private static final MathFunction sqrFunction = new SqrFunction();
+    private static final MathFunction sqrFunction = new  SqrFunction();
     private static final TabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(sqrFunction, -5, 5, 11);
     private static final TabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(sqrFunction, -5, 5, 11);
 
@@ -132,12 +132,12 @@ public class SynchronizedTabulatedFunctionTest {
     public void testApply() {
         TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
         TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedLinkedList.apply(-3), 9.);
-        assertEquals(synchronizedLinkedList.apply(1), 1.);
-        assertEquals(synchronizedLinkedList.apply(6), 34.);
-        assertEquals(synchronizedArray.apply(-3), 9.);
-        assertEquals(synchronizedArray.apply(1), 1.);
-        assertEquals(synchronizedArray.apply(6), 34.);
+        assertEquals(synchronizedLinkedList.apply(-5), 25, 0.001);
+        assertEquals(synchronizedLinkedList.apply(0), 25);
+        assertEquals(synchronizedLinkedList.apply(6), 0);
+        assertEquals(synchronizedArray.apply(-3), 0);
+        assertEquals(synchronizedArray.apply(1), 0);
+        assertEquals(synchronizedArray.apply(6), 0);
     }
 
     @Test
