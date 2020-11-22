@@ -4,146 +4,144 @@ import org.testng.annotations.Test;
 import ru.ssau.tk.chpok.labs.functions.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.*;
 
 public class SynchronizedTabulatedFunctionTest {
-    private static final MathFunction sqrFunction = new  SqrFunction();
-    private static final TabulatedFunction linkedListTabulatedFunction = new LinkedListTabulatedFunction(sqrFunction, -5, 5, 11);
-    private static final TabulatedFunction arrayTabulatedFunction = new ArrayTabulatedFunction(sqrFunction, -5, 5, 11);
+    public static final double ACCURACY = 0.00001;
+
+    private final double[] xValues = new double[]{1, 2, 3, 4, 5};
+    private final double[] yValues = new double[]{2, 4, 6, 8, 10};
+    private final Object mutex = new Object();
+
+    private SynchronizedTabulatedFunction getSynchronizedList() {
+        return new SynchronizedTabulatedFunction(new LinkedListTabulatedFunction(xValues, yValues), mutex);
+    }
+
+    private SynchronizedTabulatedFunction getSynchronizedArray() {
+        return new SynchronizedTabulatedFunction(new ArrayTabulatedFunction(xValues, yValues), mutex);
+    }
 
     @Test
     public void testGetCount() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedArray.getCount(), 11);
-        assertEquals(synchronizedLinkedList.getCount(), 11);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+
+        assertEquals(synchronizedTabulatedFunction.getCount(), 5);
+        assertEquals(synchronizedArr.getCount(), 5);
     }
 
     @Test
     public void testGetX() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedArray.getX(0), -5.);
-        assertEquals(synchronizedArray.getX(5), 0.);
-        assertEquals(synchronizedLinkedList.getX(0), -5.);
-        assertEquals(synchronizedLinkedList.getX(5), 0.);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+
+        assertEquals(synchronizedTabulatedFunction.getX(0), 1.0);
+        assertEquals(synchronizedArr.getX(3), 4.0);
     }
 
     @Test
     public void testGetY() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedArray.getY(0), 25.);
-        assertEquals(synchronizedArray.getY(3), 4.);
-        assertEquals(synchronizedArray.getY(10), 25.);
-        assertEquals(synchronizedLinkedList.getY(0), 25.);
-        assertEquals(synchronizedLinkedList.getY(3), 4.);
-        assertEquals(synchronizedLinkedList.getY(10), 25.);
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+        assertEquals(synchronizedArr.getY(3), 8.0);
+
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        assertEquals(synchronizedTabulatedFunction.getY(0), 2.0);
     }
 
     @Test
     public void testSetY() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        synchronizedArray.setY(0, 1.);
-        assertEquals(synchronizedArray.getY(0), 1.);
-        synchronizedLinkedList.setY(10, 1.);
-        assertEquals(synchronizedLinkedList.getY(10), 1.);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        synchronizedTabulatedFunction.setY(2, 39);
+        assertEquals(synchronizedTabulatedFunction.getY(2), 39, ACCURACY);
+
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+        synchronizedArr.setY(3, 12);
+        assertEquals(synchronizedArr.getY(3), 12.0);
     }
 
     @Test
     public void testIndexOfX() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedArray.indexOfX(-4.), 1);
-        assertEquals(synchronizedArray.indexOfX(3.), 8);
-        assertEquals(synchronizedLinkedList.indexOfX(-4.), 1);
-        assertEquals(synchronizedLinkedList.indexOfX(3.), 8);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        assertEquals(synchronizedTabulatedFunction.indexOfX(4), 3);
+
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+        assertEquals(synchronizedArr.indexOfX(4), 3);
     }
 
     @Test
     public void testIndexOfY() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedArray.indexOfY(25.), 0);
-        assertEquals(synchronizedArray.indexOfY(0.), 5);
-        assertEquals(synchronizedLinkedList.indexOfY(25.), 0);
-        assertEquals(synchronizedLinkedList.indexOfY(0.), 5);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        assertEquals(synchronizedTabulatedFunction.indexOfY(4), 1);
+        assertEquals(synchronizedTabulatedFunction.indexOfY(6), 2);
+        assertEquals(synchronizedTabulatedFunction.indexOfY(8), 3);
+
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+        assertEquals(synchronizedArr.indexOfY(4), 1);
+        assertEquals(synchronizedArr.indexOfY(6), 2);
+        assertEquals(synchronizedArr.indexOfY(8), 3);
     }
 
     @Test
     public void testLeftBound() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedArray.leftBound(), -5.);
-        assertEquals(synchronizedLinkedList.leftBound(), -5.);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        assertEquals(synchronizedTabulatedFunction.leftBound(), 1.0);
+
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+        assertEquals(synchronizedArr.leftBound(), 1.0);
     }
 
     @Test
     public void testRightBound() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedArray.rightBound(), 5.);
-        assertEquals(synchronizedLinkedList.rightBound(), 5.);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        assertEquals(synchronizedTabulatedFunction.rightBound(), 5.0);
+
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+        assertEquals(synchronizedArr.rightBound(), 5.0);
     }
 
     @Test
-    public void testIteratorThroughWile() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        Iterator<Point> iteratorOfArray = synchronizedArray.iterator();
+    public void testIteratorWhile() {
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedArray();
+        Iterator<Point> it1 = synchronizedTabulatedFunction.iterator();
         int i = 0;
-        while (iteratorOfArray.hasNext()) {
-            Point currentPoint = iteratorOfArray.next();
-            assertEquals(synchronizedArray.getX(i), currentPoint.x, 0.001);
-            assertEquals(synchronizedArray.getY(i++), currentPoint.y, 0.001);
+        while (it1.hasNext()) {
+            Point a = it1.next();
+            assertEquals(synchronizedTabulatedFunction.getX(i), a.x);
+            assertEquals(synchronizedTabulatedFunction.getY(i++), a.y);
         }
-        assertEquals(synchronizedArray.getCount(), i);
-        Iterator<Point> iteratorOfLinkedList = synchronizedArray.iterator();
-        i = 0;
-        while (iteratorOfLinkedList.hasNext()) {
-            Point currentPoint = iteratorOfLinkedList.next();
-            assertEquals(synchronizedLinkedList.getX(i), currentPoint.x, 0.001);
-            assertEquals(synchronizedLinkedList.getY(i++), currentPoint.y, 0.001);
-        }
-        assertEquals(synchronizedLinkedList.getCount(), i);
+        assertEquals(synchronizedTabulatedFunction.getCount(), i);
+        assertThrows(NoSuchElementException.class, it1::next);
+
     }
 
     @Test
-    public void testIteratorThroughForEach() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
+    public void testIteratorForEach() {
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
         int i = 0;
-        for (Point currentPoint : synchronizedArray) {
-            assertEquals(currentPoint.x, synchronizedArray.getX(i), 0.001);
-            assertEquals(currentPoint.y, synchronizedArray.getY(i++), 0.001);
+        for (Point a : synchronizedTabulatedFunction) {
+            assertEquals(a.x, synchronizedTabulatedFunction.getX(i));
+            assertEquals(a.y, synchronizedTabulatedFunction.getY(i++));
         }
-        assertEquals(synchronizedArray.getCount(), i);
-        i = 0;
-        for (Point currentPoint : synchronizedLinkedList) {
-            assertEquals(currentPoint.x, synchronizedLinkedList.getX(i), 0.001);
-            assertEquals(currentPoint.y, synchronizedLinkedList.getY(i++), 0.001);
-        }
-        assertEquals(synchronizedLinkedList.getCount(), i);
+        assertEquals(synchronizedTabulatedFunction.getCount(), i);
     }
+
 
     @Test
     public void testApply() {
-        TabulatedFunction synchronizedLinkedList = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        TabulatedFunction synchronizedArray = new SynchronizedTabulatedFunction(arrayTabulatedFunction);
-        assertEquals(synchronizedLinkedList.apply(-3), 9.);
-        assertEquals(synchronizedLinkedList.apply(1), 1.);
-        assertEquals(synchronizedLinkedList.apply(6), 34.);
-        assertEquals(synchronizedArray.apply(-3), 9.);
-        assertEquals(synchronizedArray.apply(1), 1.);
-        assertEquals(synchronizedArray.apply(6), 34.);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        assertEquals(synchronizedTabulatedFunction.apply(5), 10.0, ACCURACY);
+
+        SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
+        assertEquals(synchronizedArr.apply(6), 12.0);
     }
 
     @Test
     public void testDoSynchronously() {
-        SynchronizedTabulatedFunction synchronizedTabulatedFunction = new SynchronizedTabulatedFunction(linkedListTabulatedFunction);
-        assertEquals((int) synchronizedTabulatedFunction.doSynchronously(SynchronizedTabulatedFunction::getCount), 11);
-        assertEquals((double) synchronizedTabulatedFunction.doSynchronously(SynchronizedTabulatedFunction::rightBound), 5.0);
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        assertEquals((int) synchronizedTabulatedFunction.doSynchronously(SynchronizedTabulatedFunction::getCount), 5);
+        assertEquals(java.util.Optional.ofNullable(synchronizedTabulatedFunction.doSynchronously(SynchronizedTabulatedFunction::leftBound)), 1.0);
+
     }
 }

@@ -7,29 +7,14 @@ import ru.ssau.tk.chpok.labs.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.chpok.labs.functions.factory.TabulatedFunctionFactory;
 
 public class TabulatedDifferentialOperator implements DifferentialOperator<TabulatedFunction> {
-    private TabulatedFunctionFactory factory;
+    TabulatedFunctionFactory factory;
+
+    public TabulatedDifferentialOperator() {
+        this.factory = new ArrayTabulatedFunctionFactory();
+    }
 
     public TabulatedDifferentialOperator(TabulatedFunctionFactory factory) {
         this.factory = factory;
-    }
-
-    public TabulatedDifferentialOperator() {
-        factory = new ArrayTabulatedFunctionFactory();
-    }
-
-    @Override
-    public TabulatedFunction derive(TabulatedFunction function) {
-        int count = function.getCount();
-        Point[] points = TabulatedFunctionOperationService.asPoints(function);
-        double[] xValues = new double[count];
-        double[] yValues = new double[count];
-        for (int i = 0; i < count - 1; i++) {
-            yValues[i] = (points[i + 1].y - points[i].y) / (points[i + 1].x - points[i].x);
-            xValues[i] = points[i].x;
-        }
-        yValues[count - 1] = (points[count - 2].y - points[count - 1].y) / (points[count - 2].x - points[count - 1].x);
-        xValues[count - 1] = points[count - 1].x;
-        return factory.create(xValues, yValues);
     }
 
     public void setFactory(TabulatedFunctionFactory factory) {
@@ -40,14 +25,34 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         return factory;
     }
 
+    @Override
+    public TabulatedFunction derive(TabulatedFunction function) {
+
+        Point[] points = TabulatedFunctionOperationService.asPoints(function);
+        int length = points.length;
+
+        double[] xValues = new double[length];
+        double[] yValues = new double[length];
+
+        for (int i = 0; i < length - 1; i++) {
+            yValues[i] = (points[i + 1].y - points[i].y) / (points[i + 1].x - points[i].x);
+            xValues[i] = points[i].x;
+        }
+
+        yValues[length - 1] = yValues[length - 2];
+        xValues[length - 1] = points[length - 1].x;
+
+        return factory.create(xValues, yValues);
+    }
+
     public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
+        Object mu = new Object();
 
         if (function instanceof SynchronizedTabulatedFunction) {
             return ((SynchronizedTabulatedFunction) function).doSynchronously(this::derive);
         }
-        SynchronizedTabulatedFunction syncFunc = new SynchronizedTabulatedFunction(function);
+        SynchronizedTabulatedFunction syncFunc = new SynchronizedTabulatedFunction(function, mu);
         return syncFunc.doSynchronously(this::derive);
     }
-
 
 }

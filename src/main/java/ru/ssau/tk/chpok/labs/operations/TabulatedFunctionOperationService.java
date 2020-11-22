@@ -24,12 +24,15 @@ public class TabulatedFunctionOperationService {
 
 
     public static Point[] asPoints(TabulatedFunction tabulatedFunction) {
+
         int i = 0;
         Point[] points = new Point[tabulatedFunction.getCount()];
-        for (Point newPoint : tabulatedFunction) {
-            points[i++] = newPoint;
+
+        for (Point point : tabulatedFunction) {
+            points[i++] = point;
         }
         return points;
+
     }
 
     private interface BiOperation {

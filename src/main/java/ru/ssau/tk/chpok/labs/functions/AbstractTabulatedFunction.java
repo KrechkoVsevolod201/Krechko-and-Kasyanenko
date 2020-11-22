@@ -5,7 +5,6 @@ import ru.ssau.tk.chpok.labs.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.chpok.labs.operations.TabulatedFunctionOperationService;
 
 public abstract class AbstractTabulatedFunction extends Object implements TabulatedFunction {
-    //protected int count;
 
     protected abstract int floorIndexOfX(double x);
 
@@ -20,18 +19,16 @@ public abstract class AbstractTabulatedFunction extends Object implements Tabula
     }
 
     public double apply(double x) {
-        int index = indexOfX(x);
-
         if (x < leftBound()) {
-            return (extrapolateLeft(x));
+            return extrapolateLeft(x);
         }
         if (x > rightBound()) {
-            return (extrapolateRight(x));
+            return extrapolateRight(x);
         }
-        if (index != -1) {
-            return (getY(index));
+        if (indexOfX(x) == -1) {
+            return interpolate(x, floorIndexOfX(x));
         }
-        return (interpolate(x, floorIndexOfX(x)));
+        return getY(indexOfX(x));
     }
 
     protected static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
@@ -53,17 +50,19 @@ public abstract class AbstractTabulatedFunction extends Object implements Tabula
         }
     }
 
-    @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append(getClass().getSimpleName()).append(" size = ").append(this.getCount()).append("\n");
+        str.append(this.getClass().getSimpleName()).append(" size = ").append(this.getCount()).append("\n");
+
         for (Point point : this) {
             str.append("[")
                     .append(point.x)
                     .append("; ")
                     .append(point.y)
                     .append("]\n");
+
         }
+        str.deleteCharAt(str.length() - 1);
         return str.toString();
     }
 }
