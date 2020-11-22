@@ -1,5 +1,6 @@
 package ru.ssau.tk.chpok.labs.operations;
 
+import ru.ssau.tk.chpok.labs.concurrent.SynchronizedTabulatedFunction;
 import ru.ssau.tk.chpok.labs.functions.Point;
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 import ru.ssau.tk.chpok.labs.functions.factory.ArrayTabulatedFunctionFactory;
@@ -38,5 +39,15 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
     public TabulatedFunctionFactory getFactory() {
         return factory;
     }
+
+    public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
+
+        if (function instanceof SynchronizedTabulatedFunction) {
+            return ((SynchronizedTabulatedFunction) function).doSynchronously(this::derive);
+        }
+        SynchronizedTabulatedFunction syncFunc = new SynchronizedTabulatedFunction(function);
+        return syncFunc.doSynchronously(this::derive);
+    }
+
 
 }

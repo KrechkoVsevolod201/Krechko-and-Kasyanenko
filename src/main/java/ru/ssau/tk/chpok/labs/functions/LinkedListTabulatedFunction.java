@@ -150,23 +150,18 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     @Override
-    protected int floorIndexOfX(double x) {
-        Node addVar;
-        addVar = head;
-        int flag = 0;
-        for (int i = 0; i < count; i++) {
-            if (addVar.x < x) {
-                flag += 1;
-                addVar = addVar.next;
+    public int floorIndexOfX(double x) {
+        if (x < head.x) {
+            throw new IllegalArgumentException();
+        }
+        Node currentNode = head;
+        for (int iterator = 0; iterator + 1 < count; iterator++) {
+            if (currentNode.next.x > x) {
+                return iterator;
             }
+            currentNode = currentNode.next;
         }
-        if (flag == 0) {
-            return 0;
-        } else if (flag == count) {
-            return count;
-        } else {
-            return flag;
-        }
+        return count;
     }
 
     @Override
@@ -214,7 +209,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                     node = (node != head.prev) ? node.next : null;
                     return point;
                 } else {
-                    throw new NoSuchElementException("No such element");
+                    throw new NoSuchElementException();
                 }
             }
         };

@@ -8,15 +8,15 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
-private final TabulatedFunction tabulatedFunction;
+    private final TabulatedFunction tabulatedFunction;
 
-public SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
+    public SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
-        }
+    }
 
-public interface Operation<T> {
-    T apply(SynchronizedTabulatedFunction synchronizedTabulatedFunction);
-}
+    public interface Operation<T> {
+        T apply(SynchronizedTabulatedFunction synchronizedTabulatedFunction);
+    }
 
     public <T> T doSynchronously(Operation<? extends T> operation) {
         synchronized (tabulatedFunction) {
@@ -87,10 +87,12 @@ public interface Operation<T> {
             Point[] points = TabulatedFunctionOperationService.asPoints(tabulatedFunction);
             return new Iterator<>() {
                 int i = 0;
+
                 @Override
                 public boolean hasNext() {
                     return i < points.length;
                 }
+
                 @Override
                 public Point next() {
                     if (!hasNext()) {

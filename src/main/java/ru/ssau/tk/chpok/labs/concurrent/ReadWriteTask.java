@@ -11,19 +11,16 @@ public class ReadWriteTask implements Runnable {
 
     @Override
     public void run() {
-        double x;
-        double y;
         for (int i = 0; i < tabulatedFunction.getCount(); i++) {
-            x = tabulatedFunction.getX(i);
+            double currentX = tabulatedFunction.getX(i);
+            double currentY;
             synchronized (tabulatedFunction) {
-                y = tabulatedFunction.getY(i);
-                System.out.printf("%s, before write: i =  % d  , x = %f, y = %f", Thread.currentThread().getName(), i, x, y);
-                System.out.println();
-                tabulatedFunction.setY(i, y + 1);
-                y = tabulatedFunction.getY(i);
+                currentY = tabulatedFunction.getY(i);
+                System.out.println(Thread.currentThread().getName() + " before write: i = " + i + " x = " + currentX + " y = " + currentY);
+                tabulatedFunction.setY(i, currentY + 1);
+                currentY = tabulatedFunction.getY(i);
             }
-            System.out.printf("%s, after write: i = %d, x = %f, y = %f", Thread.currentThread().getName(), i, x, y);
-            System.out.println();
+            System.out.println(Thread.currentThread().getName() + " after write: i = " + i + " x = " + currentX + " y = " + currentY);
         }
     }
 }
