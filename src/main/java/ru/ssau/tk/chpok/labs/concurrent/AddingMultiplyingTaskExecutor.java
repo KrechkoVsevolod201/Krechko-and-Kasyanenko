@@ -2,9 +2,7 @@ package ru.ssau.tk.chpok.labs.concurrent;
 
 import ru.ssau.tk.chpok.labs.functions.ConstantFunction;
 import ru.ssau.tk.chpok.labs.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 
-import java.util.concurrent.CountDownLatch;
 
 
 public class AddingMultiplyingTaskExecutor {
