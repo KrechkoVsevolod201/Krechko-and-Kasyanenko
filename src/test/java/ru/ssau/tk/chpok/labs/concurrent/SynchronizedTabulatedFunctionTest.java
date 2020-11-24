@@ -5,7 +5,6 @@ import ru.ssau.tk.chpok.labs.functions.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 import static org.testng.Assert.*;
 
 public class SynchronizedTabulatedFunctionTest {
@@ -135,13 +134,5 @@ public class SynchronizedTabulatedFunctionTest {
 
         SynchronizedTabulatedFunction synchronizedArr = getSynchronizedArray();
         assertEquals(synchronizedArr.apply(6), 12.0);
-    }
-
-    @Test
-    public void testDoSynchronously() {
-        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
-        assertEquals((int) synchronizedTabulatedFunction.doSynchronously(SynchronizedTabulatedFunction::getCount), 5);
-        assertEquals(java.util.Optional.ofNullable(synchronizedTabulatedFunction.doSynchronously(SynchronizedTabulatedFunction::leftBound)), 1.0);
-
     }
 }

@@ -44,15 +44,4 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
 
         return factory.create(xValues, yValues);
     }
-
-    public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
-        Object mu = new Object();
-
-        if (function instanceof SynchronizedTabulatedFunction) {
-            return ((SynchronizedTabulatedFunction) function).doSynchronously(this::derive);
-        }
-        SynchronizedTabulatedFunction syncFunc = new SynchronizedTabulatedFunction(function, mu);
-        return syncFunc.doSynchronously(this::derive);
-    }
-
 }
