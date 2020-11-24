@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.io.Serializable;
 
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
     private static final long serialVersionUID = -8182024985544529148L;
     private Node head;
@@ -20,15 +21,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
 
         if (xValues.length < 2) {
-            throw new IllegalArgumentException("Array size is smaller than 2");
-        }
-        AbstractTabulatedFunction.checkLengthIsTheSame(xValues, yValues);
-        AbstractTabulatedFunction.checkSorted(xValues);
-        this.count = xValues.length;
-        for (int i = 0; i < count; i++) {
-            this.addNode(xValues[i], yValues[i]);
+            throw new IllegalArgumentException("Array is smaller then 2");
+        } else {
+            for (int i = 0; i < xValues.length; i++) {
+                this.addNode(xValues[i], yValues[i]);
+            }
         }
     }
 
@@ -60,7 +61,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             head.prev.next = newNode;
             head.prev = newNode;
         }
-
+        count++;
     }
 
     private Node getNode(int index) {
@@ -150,18 +151,23 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     @Override
-    public int floorIndexOfX(double x) {
-        if (x < head.x) {
-            throw new IllegalArgumentException();
-        }
-        Node currentNode = head;
-        for (int iterator = 0; iterator + 1 < count; iterator++) {
-            if (currentNode.next.x > x) {
-                return iterator;
+    protected int floorIndexOfX(double x) {
+        Node addVar;
+        addVar = head;
+        int flag = 0;
+        for (int i = 0; i < count; i++) {
+            if (addVar.x < x) {
+                flag += 1;
+                addVar = addVar.next;
             }
-            currentNode = currentNode.next;
         }
-        return count;
+        if (flag == 0) {
+            return 0;
+        } else if (flag == count) {
+            return count;
+        } else {
+            return flag;
+        }
     }
 
     @Override
@@ -177,12 +183,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (x < head.x || x > head.prev.x) {
-            throw new InterpolationException("X is out of bounds of interpolation");
+        Node floor = getNode(floorIndex);
+        Node ceiling = floor.next;
+        if (x < floor.x || x > ceiling.x) {
+            throw new InterpolationException("x is out of bounds of interpolation");
         }
-        return interpolate(x, getNode(floorIndex).x, getNode(floorIndex + 1).x, getNode(floorIndex).y, getNode(floorIndex + 1).y);
+        return interpolate(x, floor.x, ceiling.x, floor.y, ceiling.y);
     }
-
 
     public static LinkedListTabulatedFunction createTabulatedFunctionDefinedThroughList(double[] valuesX, double[] valuesY) {
         return new LinkedListTabulatedFunction(valuesX, valuesY);
@@ -209,7 +216,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                     node = (node != head.prev) ? node.next : null;
                     return point;
                 } else {
-                    throw new NoSuchElementException();
+                    throw new NoSuchElementException("No such element");
                 }
             }
         };
