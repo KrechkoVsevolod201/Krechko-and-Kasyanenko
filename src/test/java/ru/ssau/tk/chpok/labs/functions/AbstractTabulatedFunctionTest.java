@@ -122,8 +122,8 @@ public class AbstractTabulatedFunctionTest {
         TabulatedFunctionFactory arrayFactory = new ArrayTabulatedFunctionFactory();
         TabulatedFunction listFunction = listFactory.create(new double[]{-1.0, 0.0, 1.0, 2.0}, new double[]{-5.0, 0.0, 5.0, 12.0});
         TabulatedFunction arrayFunction = arrayFactory.create(new double[]{-7.0, -2.0, 1.0}, new double[]{-49.0, -8.0, 2.0});
-        assertEquals(listFunction.toString(), "LinkedListTabulatedFunction; size = 4\n[-1.0, -5.0]\n[0.0, 0.0]\n[1.0, 5.0]\n[2.0, 12.0]");
-        assertEquals(arrayFunction.toString(), "ArrayTabulatedFunction; size = 3\n[-7.0, -49.0]\n[-2.0, -8.0]\n[1.0, 2.0]");
+        assertEquals(listFunction.toString(), "LinkedListTabulatedFunction size = 4\n[-1.0; -5.0]\n[0.0; 0.0]\n[1.0; 5.0]\n[2.0; 12.0]");
+        assertEquals(arrayFunction.toString(), "ArrayTabulatedFunction size = 3\n[-7.0; -49.0]\n[-2.0; -8.0]\n[1.0; 2.0]");
     }
 
 }
