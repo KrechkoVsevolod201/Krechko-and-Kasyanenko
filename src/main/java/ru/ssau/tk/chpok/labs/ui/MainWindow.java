@@ -20,7 +20,7 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         super("Главное окно");
-        getContentPane().setLayout(new GridLayout());
+        getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMaximumSize(new Dimension(WIDTH, HEIGHT));
@@ -40,8 +40,6 @@ public class MainWindow extends JFrame {
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         getContentPane().setBackground(colorOption.getColor());
-                        setContentPane(createContentPane());
-                        setVisible(true); //  форма будет видимой
                     }
                 }
             });
