@@ -25,26 +25,8 @@ public class MainWindow extends JFrame {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMaximumSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        List<ColorOption> colorOptions = new ArrayList<>();
-        colorOptions.add(new ColorOption("Black", Color.BLACK));
-        colorOptions.add(new ColorOption("White", Color.WHITE));
-        colorOptions.add(new ColorOption("Gray", Color.LIGHT_GRAY));
-        colorOptions.add(new ColorOption("Orange", Color.ORANGE));
-        colorOptions.add(new ColorOption("Tea tree", new Color(0x008080)));
-        ButtonGroup buttonGroup = new ButtonGroup();
-        for (var colorOption : colorOptions) {
-            buttonGroup.add(colorOption);
-            getContentPane().add(colorOption);
-            colorOption.addItemListener(new ItemListener() {
-                @Override
-                public void itemStateChanged(ItemEvent e) {
-                    if (e.getStateChange() == ItemEvent.SELECTED) {
-                        getContentPane().setBackground(colorOption.getColor());
-                    }
-                }
-            });
-        }
 
+        setBackground(Color.WHITE);
         setLocationRelativeTo(null);
         setVisible(true);
 
@@ -62,8 +44,6 @@ public class MainWindow extends JFrame {
     }
 
 
-
-
     //кнопки настройки - сменить тип фабрики - массивы - связный список
     private JMenuBar getCreatingWindowSettings() {
         JMenuBar jMenuBar = new JMenuBar();
@@ -72,11 +52,8 @@ public class MainWindow extends JFrame {
         JMenu changeFactory = new JMenu("Сменить тип фабрики");
         JMenuItem arraysItem = new JRadioButtonMenuItem("Массивы");
         JMenuItem linkedListItem = new JRadioButtonMenuItem("Связный список");
-
-        List<ColorOption> colorOptions = new ArrayList<>();
-        colorOptions.add(new ColorOption("Тёмная тема", Color.BLACK));
-        colorOptions.add(new ColorOption("Светлая тема", Color.WHITE));
-        ButtonGroup buttonGroup = new ButtonGroup();
+        JMenuItem whiteMode = new JRadioButtonMenuItem("Светлая тема");
+        JMenuItem darkMode = new JRadioButtonMenuItem("Тёмная теиа");
 
         if (factory.getClass() == ArrayTabulatedFunctionFactory.class) {
             arraysItem.setSelected(true);
@@ -84,6 +61,10 @@ public class MainWindow extends JFrame {
         } else {
             arraysItem.setSelected(false);
             linkedListItem.setSelected(true);
+        }
+        if (getBackground() == Color.WHITE){
+            whiteMode.setSelected(true);
+            darkMode.setSelected(false);
         }
         arraysItem.addMouseListener(new MouseAdapter() {
             @Override
@@ -103,7 +84,26 @@ public class MainWindow extends JFrame {
                 arraysItem.setSelected(false);
             }
         });
-
+        whiteMode.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    getContentPane().setBackground(Color.WHITE);
+                }
+                darkMode.setSelected(false);
+            }
+        });
+        darkMode.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    getContentPane().setBackground(Color.BLACK);
+                }
+                whiteMode.setSelected(false);
+            }
+        });
+        theme.add(whiteMode);
+        theme.add(darkMode);
         changeFactory.add(arraysItem);
         changeFactory.add(linkedListItem);
         settings.add(changeFactory);
