@@ -55,6 +55,8 @@ public class MainWindow extends JFrame {
         JMenuItem whiteMode = new JRadioButtonMenuItem("Светлая тема");
         JMenuItem darkMode = new JRadioButtonMenuItem("Тёмная тема");
         JMenuItem pinkMode = new JRadioButtonMenuItem("Розовая тема");
+        JMenuItem yellowMode = new JRadioButtonMenuItem("Желтая тема");
+        JMenuItem greenMode = new JRadioButtonMenuItem("Зеленая тема");
 
         if (factory.getClass() == ArrayTabulatedFunctionFactory.class) {
             arraysItem.setSelected(true);
@@ -67,6 +69,7 @@ public class MainWindow extends JFrame {
             whiteMode.setSelected(true);
             darkMode.setSelected(false);
             pinkMode.setSelected(false);
+            yellowMode.setSelected(false);
         }
         arraysItem.addMouseListener(new MouseAdapter() {
             @Override
@@ -94,6 +97,8 @@ public class MainWindow extends JFrame {
                 }
                 darkMode.setSelected(false);
                 pinkMode.setSelected(false);
+                yellowMode.setSelected(false);
+                greenMode.setSelected(false);
             }
         });
         darkMode.addMouseListener(new MouseAdapter() {
@@ -104,6 +109,8 @@ public class MainWindow extends JFrame {
                 }
                 whiteMode.setSelected(false);
                 pinkMode.setSelected(false);
+                yellowMode.setSelected(false);
+                greenMode.setSelected(false);
             }
         });
         pinkMode.addMouseListener(new MouseAdapter() {
@@ -114,11 +121,39 @@ public class MainWindow extends JFrame {
                 }
                 darkMode.setSelected(false);
                 whiteMode.setSelected(false);
+                yellowMode.setSelected(false);
+                greenMode.setSelected(false);
+            }
+        });
+       yellowMode.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    getContentPane().setBackground(Color.YELLOW);
+                }
+                darkMode.setSelected(false);
+                whiteMode.setSelected(false);
+                pinkMode.setSelected(false);
+                greenMode.setSelected(false);
+            }
+        });
+        greenMode.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    getContentPane().setBackground(Color.GREEN);
+                }
+                darkMode.setSelected(false);
+                whiteMode.setSelected(false);
+                pinkMode.setSelected(false);
+                yellowMode.setSelected(false);
             }
         });
         theme.add(whiteMode);
         theme.add(darkMode);
         theme.add(pinkMode);
+        theme.add(yellowMode);
+        theme.add(greenMode);
         changeFactory.add(arraysItem);
         changeFactory.add(linkedListItem);
         settings.add(changeFactory);
