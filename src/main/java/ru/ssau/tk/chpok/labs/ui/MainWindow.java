@@ -53,7 +53,8 @@ public class MainWindow extends JFrame {
         JMenuItem arraysItem = new JRadioButtonMenuItem("Массивы");
         JMenuItem linkedListItem = new JRadioButtonMenuItem("Связный список");
         JMenuItem whiteMode = new JRadioButtonMenuItem("Светлая тема");
-        JMenuItem darkMode = new JRadioButtonMenuItem("Тёмная теиа");
+        JMenuItem darkMode = new JRadioButtonMenuItem("Тёмная тема");
+        JMenuItem pinkMode = new JRadioButtonMenuItem("Розовая тема");
 
         if (factory.getClass() == ArrayTabulatedFunctionFactory.class) {
             arraysItem.setSelected(true);
@@ -65,6 +66,7 @@ public class MainWindow extends JFrame {
         if (getBackground() == Color.WHITE){
             whiteMode.setSelected(true);
             darkMode.setSelected(false);
+            pinkMode.setSelected(false);
         }
         arraysItem.addMouseListener(new MouseAdapter() {
             @Override
@@ -91,6 +93,7 @@ public class MainWindow extends JFrame {
                     getContentPane().setBackground(Color.WHITE);
                 }
                 darkMode.setSelected(false);
+                pinkMode.setSelected(false);
             }
         });
         darkMode.addMouseListener(new MouseAdapter() {
@@ -100,10 +103,22 @@ public class MainWindow extends JFrame {
                     getContentPane().setBackground(Color.BLACK);
                 }
                 whiteMode.setSelected(false);
+                pinkMode.setSelected(false);
+            }
+        });
+        pinkMode.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    getContentPane().setBackground(Color.PINK);
+                }
+                darkMode.setSelected(false);
+                whiteMode.setSelected(false);
             }
         });
         theme.add(whiteMode);
         theme.add(darkMode);
+        theme.add(pinkMode);
         changeFactory.add(arraysItem);
         changeFactory.add(linkedListItem);
         settings.add(changeFactory);
