@@ -15,13 +15,14 @@ public class MainWindow extends JFrame {
     public static final int HEIGHT = 340;
     public static final int WIDTH = 640;
     public static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
-
+    // Текстовые поля
+    JTextField smallField, bigField;
 
 
     public MainWindow() {
         super("Главное окно");
         getContentPane().setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMaximumSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -38,7 +39,6 @@ public class MainWindow extends JFrame {
         // Подключаем меню к интерфейсу приложения
         setLocationRelativeTo(null);
         setVisible(true);
-
 
 
     }
@@ -65,7 +65,7 @@ public class MainWindow extends JFrame {
             arraysItem.setSelected(false);
             linkedListItem.setSelected(true);
         }
-        if (getBackground() == Color.WHITE){
+        if (getBackground() == Color.WHITE) {
             whiteMode.setSelected(true);
             darkMode.setSelected(false);
             pinkMode.setSelected(false);
@@ -125,7 +125,7 @@ public class MainWindow extends JFrame {
                 greenMode.setSelected(false);
             }
         });
-       yellowMode.addMouseListener(new MouseAdapter() {
+        yellowMode.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
@@ -186,8 +186,17 @@ public class MainWindow extends JFrame {
         ActionListener actionListener = new TestActionListener(); // создаём создаём действие
         // назначаем этот обработчик кнопке
         redButton.addActionListener(actionListener);// прикрепляем действие к кнопке (срабоет по нажатии на неё)
+        redButton.setActionCommand("Open");
         totalGUI.add(redButton); // добавляем кнопку на поверхность
+        pack();
 
+        //Текстовое поле----------------
+        smallField = new JTextField(25);
+        smallField.setToolTipText("Введите количество точек у функции");
+        smallField.setFont(new Font("Dialog", Font.PLAIN, 20));
+        smallField.setLocation(100, 100); // расположение кнопки
+        smallField.setSize(200, 40); // размер кнопки
+        totalGUI.add(smallField);
 
         totalGUI.setOpaque(true);
         return totalGUI; // возвращаем внешний вид
@@ -208,6 +217,7 @@ public class MainWindow extends JFrame {
 
     public static void main(String[] args) {
         MainWindow demo1 = new MainWindow(); // внешность формы
+
     }
 }
 

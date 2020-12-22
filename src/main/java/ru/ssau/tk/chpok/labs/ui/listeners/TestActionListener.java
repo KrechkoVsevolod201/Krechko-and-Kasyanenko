@@ -1,19 +1,22 @@
 package ru.ssau.tk.chpok.labs.ui.listeners;
 
+import ru.ssau.tk.chpok.labs.ui.MainWindow;
+import ru.ssau.tk.chpok.labs.ui.TextFieldTest;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowEvent;
+import javax.swing.SwingUtilities;
 
-public class TestActionListener implements ActionListener { // наследуемся от стандартного класса  ActionListener
+public class TestActionListener extends JFrame implements ActionListener { // наследуемся от стандартного класса  ActionListener
     public void actionPerformed(ActionEvent e) {
-        // выведем сообщение из нескольких строк
-        // одну из них в кавычках
+        String cmd = e.getActionCommand();
+            if (cmd.equals("Open")) {
+                new TextFieldTest();
+            }
 
-        // задаём текст для сообщения
-        String message = "Нажал ок";
-        // выполняем команду вывода сообщения
-        JOptionPane.showMessageDialog(new JFrame(), message, "Message by 2",
-                JOptionPane.ERROR_MESSAGE);
     }
 }
