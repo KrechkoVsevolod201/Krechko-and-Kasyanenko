@@ -44,7 +44,6 @@ public class MainWindow extends JFrame {
     }
 
 
-
     //кнопки настройки - сменить тип фабрики - массивы - связный список
     private JMenuBar getCreatingWindowSettings() {
         JMenuBar jMenuBar = new JMenuBar();
