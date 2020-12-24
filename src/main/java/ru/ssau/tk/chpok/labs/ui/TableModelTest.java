@@ -17,9 +17,9 @@ public class TableModelTest extends JFrame
     private DefaultTableModel tableModel;
     private JTable table1;
     private Object[] columnsHeader = new String[] {"X", "Y"};
+    public JTextField smallField;
 
-
-    public TableModelTest() throws FileNotFoundException {
+    public TableModelTest() {
         super("Пример использования TableModel");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBackground(Color.BLACK);
@@ -30,16 +30,23 @@ public class TableModelTest extends JFrame
 
         // Создание таблицы на основании модели данных
         table1 = new JTable(tableModel);
+
         // Создание кнопки добавления строки таблицы
         JButton add = new JButton("Добавить");
         add.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Номер выделенной строки
-                int idx = table1.getSelectedRow();
-                // Вставка новой строки после выделенной
-                tableModel.insertRow(idx + 1, new String[] {
-                        String.valueOf(table1.getRowCount()),
-                        "???" });
+                int pointNumber;
+                String textNumber;
+                textNumber = smallField.getText();
+                pointNumber = Integer.parseInt(textNumber);
+                for (int i = 0; i < pointNumber; i++) {
+                    // Номер выделенной строки
+                    int idx = table1.getSelectedRow();
+                    // Вставка новой строки после выделенной
+                    tableModel.insertRow(idx + 1, new String[]{
+                            String.valueOf(table1.getRowCount()),
+                            "???"});
+                }
             }
         });
         // Создание кнопки удаления строки таблицы
@@ -53,39 +60,53 @@ public class TableModelTest extends JFrame
             }
         });
 
-        int pointNumber = 0;
-        FileInputStream fileIn = new FileInputStream("C://Users/GachiBoy/Documents/GitHub/Krechko-and-Kasyanenko/output/pointMemory");
-        try {
-            pointNumber = fileIn.read();
-            fileIn.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        table1 = new JTable(tableModel);
-        /*for(int i = 0; i < pointNumber; i++){
-            tableModel.insertRow(i + 1, new String[] {
-                    String.valueOf(table1.getRowCount()),
-                    "???"});
-        }*/
 
+        //Текстовое поле----------------
+        smallField = new JTextField(25);
+        smallField.setToolTipText("Введите количество точек у функции");
+        smallField.setFont(new Font("Dialog", Font.PLAIN, 20));
+        smallField.setText("Напишите сколько вам нужно точек");
+        /*smallField.setLocation(200, 50); // расположение кнопки
+        smallField.setSize(200, 40); // размер кнопки
+*/
+        smallField.addFocusListener(new FocusListener(){
+
+            @Override
+            public void focusGained(FocusEvent e) {
+
+                smallField.setText(null);
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                String bugText;
+                bugText = smallField.getText();
+
+                smallField.setText(bugText);
+
+            }
+
+        });
+
+        JPanel buttons = new JPanel();
+        JPanel text = new JPanel();
+        buttons.add(add);
+        buttons.add(remove);
+        text.add(smallField);
+        getContentPane().add(buttons, "North");
+        getContentPane().add(text, "South");
+        // Вывод окна на экран
+        setSize(640, 440);
+        setVisible(true);
 
 
         // Формирование интерфейса
         Box contents = new Box(BoxLayout.Y_AXIS);
         contents.add(new JScrollPane(table1));
         getContentPane().add(contents);
+        //getContentPane().add(smallField);
 
-        JPanel buttons = new JPanel();
-        buttons.add(add);
-        buttons.add(remove);
-        getContentPane().add(buttons, "South");
-        // Вывод окна на экран
-        setSize(400, 300);
-        setVisible(true);
     }
 
-
-    public static void main(String[] args) throws FileNotFoundException {
-        new TableModelTest();
-    }
 }

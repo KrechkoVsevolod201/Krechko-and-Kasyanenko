@@ -20,8 +20,6 @@ public class MainWindow extends JFrame {
     // Текстовые поля
     public JTextField smallField, bigField;
     public String pointText; // создаём объект текущей даты
-    File pointMemory = new File("C://Users/GachiBoy/Documents/GitHub/Krechko-and-Kasyanenko/output/pointMemory");
-
     public MainWindow() {
         super("Главное окно");
         getContentPane().setLayout(new FlowLayout());
@@ -173,8 +171,8 @@ public class MainWindow extends JFrame {
         totalGUI.setLayout(null);
 
         // Создадим ярлык (надпись) синего цвета
-        JLabel blueLabel = new JLabel("Здравствуйте, напишите в текстовое поле нужное вам " +
-                "\n" + "количество точек функции");
+        JLabel blueLabel = new JLabel("Здравствуйте, нажмите кнопку Создать, " +
+                "\n" + "чтобы создать новую таблицу");
         blueLabel.setLocation(1, -40); /* надпись синего цвета*/
         blueLabel.setFont(new Font("Dialog", Font.ROMAN_BASELINE, 16));
         blueLabel.setSize(640, 100); // размер области надписи
@@ -190,28 +188,13 @@ public class MainWindow extends JFrame {
 
         redButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                pointText = smallField.getText();
-                int pointNumber = Integer.parseInt(pointText);
-                try {
-                    FileOutputStream fileOut = new FileOutputStream(pointMemory);
-                    fileOut.write(pointNumber);
-                    fileOut.close();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                // Отображение введенного текста
-                JOptionPane.showMessageDialog(MainWindow.this,
-                        "Количество точек: " + smallField.getText());
-                try {
-                    new TableModelTest();
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+                new TableModelTest();
             }
         });
+
         redButton.setActionCommand("Open");
         totalGUI.add(redButton); // добавляем кнопку на поверхность
-
+/*
         //Текстовое поле----------------
         smallField = new JTextField(25);
         smallField.setToolTipText("Введите количество точек у функции");
@@ -219,39 +202,9 @@ public class MainWindow extends JFrame {
         smallField.setLocation(200, 50); // расположение кнопки
         smallField.setSize(200, 40); // размер кнопки
         totalGUI.add(smallField);
-
+*/
         totalGUI.setOpaque(true);
         return totalGUI; // возвращаем внешний вид
-    }
-
-    public JPanel createSecondContentPane() {
-        JPanel totalGUISecond = new JPanel(); // создаём "поверхность"
-        totalGUISecond.setLayout(null);
-
-        // Создадим ярлык (надпись) синего цвета
-        JLabel blueLabel = new JLabel(" =)");
-        blueLabel.setLocation(1, 15); /* надпись синего цвета*/
-        blueLabel.setSize(300, 100); // размер области надписи
-        blueLabel.setHorizontalAlignment(0);
-        blueLabel.setForeground(Color.blue); // задаём цвет
-        totalGUISecond.add(blueLabel); // добавляем текстовую метку на поверхность
-
-        totalGUISecond.setOpaque(true);
-        return totalGUISecond; // возвращаем внешний вид
-    }
-
-
-    private static class ColorOption extends JRadioButton {
-        private Color color;
-
-        public ColorOption(String colorName, Color color) {
-            super(colorName);
-            this.color = color;
-        }
-
-        public Color getColor() {
-            return color;
-        }
     }
 
     public static void main(String[] args) {

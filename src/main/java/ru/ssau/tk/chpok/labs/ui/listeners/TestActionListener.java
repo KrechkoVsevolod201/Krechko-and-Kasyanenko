@@ -10,11 +10,6 @@ import java.io.FileNotFoundException;
 
 public class TestActionListener extends JFrame implements ActionListener { // наследуемся от стандартного класса  ActionListener
     public void actionPerformed(ActionEvent e) {
-
-        try {
-            new TableModelTest();
-        } catch (FileNotFoundException fileNotFoundException) {
-            fileNotFoundException.printStackTrace();
-        }
+        new TableModelTest();
     }
 }
