@@ -8,21 +8,24 @@ import ru.ssau.tk.chpok.labs.ui.listeners.TestActionListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class MainWindow extends JFrame {
     public static final int HEIGHT = 340;
     public static final int WIDTH = 640;
     public static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     // Текстовые поля
-    JTextField smallField, bigField;
-
+    public JTextField smallField, bigField;
+    public String pointText; // создаём объект текущей даты
+    File pointMemory = new File("C://Users/GachiBoy/Documents/GitHub/Krechko-and-Kasyanenko/output/pointMemory");
 
     public MainWindow() {
         super("Главное окно");
         getContentPane().setLayout(new FlowLayout());
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMaximumSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -33,7 +36,6 @@ public class MainWindow extends JFrame {
 
         setContentPane(createContentPane()); // передаем как параметр в коструктор
         setVisible(true); //  форма будет видимой
-
 
         setJMenuBar(getCreatingWindowSettings());
         // Подключаем меню к интерфейсу приложения
@@ -171,36 +173,73 @@ public class MainWindow extends JFrame {
         totalGUI.setLayout(null);
 
         // Создадим ярлык (надпись) синего цвета
-        JLabel blueLabel = new JLabel("Какая-то надпись =)");
+        JLabel blueLabel = new JLabel("Здравствуйте, напишите в текстовое поле нужное вам " +
+                "\n" + "количество точек функции");
         blueLabel.setLocation(1, -40); /* надпись синего цвета*/
-        blueLabel.setSize(300, 100); // размер области надписи
+        blueLabel.setFont(new Font("Dialog", Font.ROMAN_BASELINE, 16));
+        blueLabel.setSize(640, 100); // размер области надписи
         //blueLabel.setHorizontalAlignment(0);
         blueLabel.setForeground(Color.blue); // задаём цвет
         totalGUI.add(blueLabel); // добавляем текстовую метку на поверхность
 
         // Создаём кнопку---------------
-        JButton redButton = new JButton("Выбор темы");
-        redButton.setLocation(1, 200); // расположение кнопки
+        JButton redButton = new JButton("Создать таблицу");
+        redButton.setLocation(200, 100); // расположение кнопки
         redButton.setSize(200, 40); // размер кнопки
         // создаём объект-обработчик события
-        ActionListener actionListener = new TestActionListener(); // создаём создаём действие
-        // назначаем этот обработчик кнопке
-        redButton.addActionListener(actionListener);// прикрепляем действие к кнопке (срабоет по нажатии на неё)
+
+        redButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                pointText = smallField.getText();
+                int pointNumber = Integer.parseInt(pointText);
+                try {
+                    FileOutputStream fileOut = new FileOutputStream(pointMemory);
+                    fileOut.write(pointNumber);
+                    fileOut.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                // Отображение введенного текста
+                JOptionPane.showMessageDialog(MainWindow.this,
+                        "Количество точек: " + smallField.getText());
+                try {
+                    new TableModelTest();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+            }
+        });
         redButton.setActionCommand("Open");
         totalGUI.add(redButton); // добавляем кнопку на поверхность
-        pack();
 
         //Текстовое поле----------------
         smallField = new JTextField(25);
         smallField.setToolTipText("Введите количество точек у функции");
         smallField.setFont(new Font("Dialog", Font.PLAIN, 20));
-        smallField.setLocation(100, 100); // расположение кнопки
+        smallField.setLocation(200, 50); // расположение кнопки
         smallField.setSize(200, 40); // размер кнопки
         totalGUI.add(smallField);
 
         totalGUI.setOpaque(true);
         return totalGUI; // возвращаем внешний вид
     }
+
+    public JPanel createSecondContentPane() {
+        JPanel totalGUISecond = new JPanel(); // создаём "поверхность"
+        totalGUISecond.setLayout(null);
+
+        // Создадим ярлык (надпись) синего цвета
+        JLabel blueLabel = new JLabel(" =)");
+        blueLabel.setLocation(1, 15); /* надпись синего цвета*/
+        blueLabel.setSize(300, 100); // размер области надписи
+        blueLabel.setHorizontalAlignment(0);
+        blueLabel.setForeground(Color.blue); // задаём цвет
+        totalGUISecond.add(blueLabel); // добавляем текстовую метку на поверхность
+
+        totalGUISecond.setOpaque(true);
+        return totalGUISecond; // возвращаем внешний вид
+    }
+
 
     private static class ColorOption extends JRadioButton {
         private Color color;

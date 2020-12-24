@@ -6,7 +6,7 @@ public class AppException {
     public AppException(ExceptionPanel exception){
         JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                 exception.getMessage(),
-                "Ошибка :'(",
+                "Ошибка :<",
                 JOptionPane.WARNING_MESSAGE
         );
     }
