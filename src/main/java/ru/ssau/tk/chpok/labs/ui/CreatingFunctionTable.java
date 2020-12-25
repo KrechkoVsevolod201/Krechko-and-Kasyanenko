@@ -2,9 +2,13 @@ package ru.ssau.tk.chpok.labs.ui;
 
 import ru.ssau.tk.chpok.labs.functions.*;
 import ru.ssau.tk.chpok.labs.functions.factory.ArrayTabulatedFunctionFactory;
+import ru.ssau.tk.chpok.labs.io.FunctionsIO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -15,9 +19,9 @@ public class CreatingFunctionTable extends JDialog {
     private final JTextField textFieldCount = new JTextField(2);
     //From - To
     private final JLabel labelInterval = new JLabel("Интервал: ");
-    private final JLabel labelBracket1 = new JLabel("[ ");
-    private final JLabel labelBracket3 = new JLabel(" ]");
-    private final JLabel labelBracket2 = new JLabel(" ; ");
+    private final JLabel labelBracket1 = new JLabel("От");
+    // private final JLabel labelBracket3 = new JLabel(" ]");
+    private final JLabel labelBracket2 = new JLabel("До");
     private final JTextField textFieldTo = new JTextField();
     private final JTextField textFieldFrom = new JTextField();
     //TF
@@ -33,9 +37,6 @@ public class CreatingFunctionTable extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setBounds(100, 100, 640, 200);
-
-        setBounds(100, 100, 800, 700);
-
         getContentPane().add(labelCount);
         getContentPane().add(textFieldCount);
 
@@ -44,7 +45,6 @@ public class CreatingFunctionTable extends JDialog {
         getContentPane().add(textFieldFrom);
         getContentPane().add(labelBracket2);
         getContentPane().add(textFieldTo);
-        getContentPane().add(labelBracket3);
 
         getContentPane().add(buttonCreateFunction);
         getContentPane().add(comboBoxFunctions);
@@ -74,6 +74,12 @@ public class CreatingFunctionTable extends JDialog {
                     }
                     dispose();
                     System.out.println(function.toString());
+                    try (BufferedWriter outArray = new BufferedWriter(new FileWriter("SavedFunction/function.txt"));) {
+                        FunctionsIO.writeTabulatedFunction(outArray, function);
+
+                    } catch (IOException err) {
+                        err.printStackTrace();
+                    }
                 }
         );
     }
@@ -93,8 +99,7 @@ public class CreatingFunctionTable extends JDialog {
                         .addComponent(labelBracket1)
                         .addComponent(textFieldFrom)
                         .addComponent(labelBracket2)
-                        .addComponent(textFieldTo)
-                        .addComponent(labelBracket3))
+                        .addComponent(textFieldTo))
                 .addComponent(comboBoxFunctions)
                 .addComponent(buttonCreateFunction)
         );
@@ -108,8 +113,7 @@ public class CreatingFunctionTable extends JDialog {
                         .addComponent(labelBracket1)
                         .addComponent(textFieldFrom)
                         .addComponent(labelBracket2)
-                        .addComponent(textFieldTo)
-                        .addComponent(labelBracket3))
+                        .addComponent(textFieldTo))
                 .addComponent(comboBoxFunctions)
                 .addComponent(buttonCreateFunction));
     }
@@ -131,8 +135,6 @@ public class CreatingFunctionTable extends JDialog {
         functions.addElement("Тождественная функция");
         functions.addElement("Нулевая функция");
         functions.addElement("Тождественная функция");
-
-
 
         return new JComboBox<>(functions);
     }
