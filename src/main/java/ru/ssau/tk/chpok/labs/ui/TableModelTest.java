@@ -18,6 +18,7 @@ public class TableModelTest extends JFrame
     private JTable table1;
     private Object[] columnsHeader = new String[] {"X", "Y"};
     public JTextField smallField;
+    //private final ImageIcon icon = new ImageIcon("Errror.jpg");
 
     public TableModelTest() {
         super("Пример использования TableModel");
@@ -39,13 +40,23 @@ public class TableModelTest extends JFrame
                 String textNumber;
                 textNumber = smallField.getText();
                 pointNumber = Integer.parseInt(textNumber);
+                if(pointNumber < 1){
+                    add.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            // Включение в интерфейс иконки
+                            JOptionPane.showMessageDialog(TableModelTest.this,
+                                    "Ну наверное число то побольше 1 надо писать, чтобы работало",
+                                    "ЭТЭНШН ПЛИЗ", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    });
+                }
                 for (int i = 0; i < pointNumber; i++) {
                     // Номер выделенной строки
                     int idx = table1.getSelectedRow();
                     // Вставка новой строки после выделенной
                     tableModel.insertRow(idx + 1, new String[]{
                             String.valueOf(table1.getRowCount()),
-                            "???"});
+                            ""});
                 }
             }
         });
