@@ -34,6 +34,8 @@ public class CreatingFunctionTable extends JDialog {
         setModal(true);
         setBounds(100, 100, 640, 200);
 
+        setBounds(100, 100, 800, 700);
+
         getContentPane().add(labelCount);
         getContentPane().add(textFieldCount);
 
@@ -127,6 +129,10 @@ public class CreatingFunctionTable extends JDialog {
         functions.addElement("Константная функция");
         functions.addElement("Нулевая функция");
         functions.addElement("Тождественная функция");
+        functions.addElement("Нулевая функция");
+        functions.addElement("Тождественная функция");
+
+
 
         return new JComboBox<>(functions);
     }
