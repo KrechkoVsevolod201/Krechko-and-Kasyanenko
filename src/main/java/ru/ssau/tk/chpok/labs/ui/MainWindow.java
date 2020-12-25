@@ -3,24 +3,23 @@ package ru.ssau.tk.chpok.labs.ui;
 import ru.ssau.tk.chpok.labs.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk.chpok.labs.functions.factory.LinkedListTabulatedFunctionFactory;
 import ru.ssau.tk.chpok.labs.functions.factory.TabulatedFunctionFactory;
-import ru.ssau.tk.chpok.labs.ui.listeners.TestActionListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class MainWindow extends JFrame {
     public static final int HEIGHT = 340;
     public static final int WIDTH = 640;
     public static TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     // Текстовые поля
-    public JTextField smallField, bigField;
-    public String pointText; // создаём объект текущей даты
-    public MainWindow() {
+    public final JButton redButton = new JButton("Создать таблицу");
+    public final JButton rickButton = new JButton("Rick Roll");
+
+    public MainWindow() throws URISyntaxException {
         super("Главное окно");
         getContentPane().setLayout(new FlowLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -34,7 +33,7 @@ public class MainWindow extends JFrame {
 
         setContentPane(createContentPane()); // передаем как параметр в коструктор
         setVisible(true); //  форма будет видимой
-
+        addButtonListeners();
         setJMenuBar(getCreatingWindowSettings());
         // Подключаем меню к интерфейсу приложения
         setLocationRelativeTo(null);
@@ -162,7 +161,7 @@ public class MainWindow extends JFrame {
         return jMenuBar;
     }
 
-    public JPanel createContentPane() {
+    public JPanel createContentPane() throws URISyntaxException {
 
         // We create a bottom JPanel to place everything on.
         // сначала создаётся "панель", на которой и размещаюся
@@ -181,33 +180,75 @@ public class MainWindow extends JFrame {
         totalGUI.add(blueLabel); // добавляем текстовую метку на поверхность
 
         // Создаём кнопку---------------
-        JButton redButton = new JButton("Создать таблицу");
         redButton.setLocation(200, 100); // расположение кнопки
         redButton.setSize(200, 40); // размер кнопки
+        redButton.setBackground(new Color(0xC175EF));
         // создаём объект-обработчик события
 
-        redButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new TableModelTest();
-            }
-        });
 
         redButton.setActionCommand("Open");
         totalGUI.add(redButton); // добавляем кнопку на поверхность
-/*
-        //Текстовое поле----------------
-        smallField = new JTextField(25);
-        smallField.setToolTipText("Введите количество точек у функции");
-        smallField.setFont(new Font("Dialog", Font.PLAIN, 20));
-        smallField.setLocation(200, 50); // расположение кнопки
-        smallField.setSize(200, 40); // размер кнопки
-        totalGUI.add(smallField);
-*/
+
+        // Создаём кнопку---------------
+        rickButton.setLocation(200, 150); // расположение кнопки
+        rickButton.setSize(200, 40); // размер кнопки
+        rickButton.setBackground(new Color(0xFF0000));
+
+        final URI uri = new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO");
+        class OpenUrlAction implements ActionListener
+        {
+            @Override public void actionPerformed(ActionEvent e) {
+                open(uri);
+            }
+        }
+        rickButton.setActionCommand("Open");
+        rickButton.addActionListener(new OpenUrlAction());
+        totalGUI.add(rickButton); // добавляем кнопку на поверхность
         totalGUI.setOpaque(true);
         return totalGUI; // возвращаем внешний вид
     }
 
-    public static void main(String[] args) {
+    private static void open(URI uri)
+    {
+        if (Desktop.isDesktopSupported())
+        {
+            try
+            {
+                Desktop.getDesktop().browse(uri);
+            }
+            catch (IOException e)
+            { /* TODO: error handling */ }
+        }
+        else
+        { /* TODO: error handling */ }
+    }
+
+    private void addButtonListeners() {
+
+        if(factory.getClass() == ArrayTabulatedFunctionFactory.class) {
+            redButton.addActionListener(e -> {
+                new CreatingArrayTable(function -> {
+                    String[] buttonsNames = {"Да", "Нет"};
+                    int resultSave = JOptionPane.showOptionDialog(new Frame(), "Вы хотите сохранить функцию?",
+                            "Сохранить..", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, buttonsNames, buttonsNames[1]);
+
+                });
+            });
+        }
+            else {
+            redButton.addActionListener(e -> {
+                new CreatingFunctionTable(function -> {
+                    String[] buttonsNames = {"Да", "Нет"};
+                    int resultSave = JOptionPane.showOptionDialog(new Frame(), "Вы хотите сохранить функцию?",
+                            "Сохранить..", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, buttonsNames, buttonsNames[1]);
+                });
+            });
+        }
+    }
+
+    public static void main(String[] args) throws URISyntaxException {
         MainWindow demo1 = new MainWindow(); // внешность формы
 
     }
