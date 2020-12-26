@@ -37,9 +37,9 @@ public class CreatingArrayTable extends JDialog {
         setModal(true);
         setBounds(100, 100, 640, 340);
         setBackground(Color.DARK_GRAY);
-        buttonCreateFunction.setBackground(new Color(0x449E2D) );
-        buttonCreateTable.setBackground(new Color(0x478B97) );
-        tableXY.setBackground(new Color(0xD5D5D5) );
+        buttonCreateFunction.setBackground(new Color(0x449E2D));
+        buttonCreateTable.setBackground(new Color(0x478B97));
+        tableXY.setBackground(new Color(0xD5D5D5));
         getContentPane().add(labelCount);
         getContentPane().add(textFieldCount);
         getContentPane().add(buttonCreateTable);
@@ -59,7 +59,7 @@ public class CreatingArrayTable extends JDialog {
         buttonCreateTable.addActionListener(
                 e -> {
                     int count = Integer.parseInt(textFieldCount.getText());
-                    if(count <= 1){
+                    if (count <= 1) {
                         buttonCreateTable.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 // Включение в интерфейс иконки
@@ -69,10 +69,12 @@ public class CreatingArrayTable extends JDialog {
                             }
                         });
                     }
-                    for (int i = 0; i < count; i++) {
-                        xValues.add(i, "");
-                        yValues.add(i, "");
-                        tableModel.fireTableDataChanged();
+                    if (count > 1) {
+                        for (int i = 0; i < count; i++) {
+                            xValues.add(i, "");
+                            yValues.add(i, "");
+                            tableModel.fireTableDataChanged();
+                        }
                     }
                 }
         );
