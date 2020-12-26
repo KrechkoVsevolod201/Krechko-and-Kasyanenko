@@ -60,7 +60,7 @@ public class CreatingArrayTable extends JDialog {
                 e -> {
                     int count = Integer.parseInt(textFieldCount.getText());
                     if(count <= 1){
-                        buttonCreateFunction.addActionListener(new ActionListener() {
+                        buttonCreateTable.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 // Включение в интерфейс иконки
                                 JOptionPane.showMessageDialog(CreatingArrayTable.this,
