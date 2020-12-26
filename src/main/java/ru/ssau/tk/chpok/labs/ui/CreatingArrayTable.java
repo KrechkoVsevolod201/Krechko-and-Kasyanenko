@@ -7,6 +7,8 @@ import ru.ssau.tk.chpok.labs.io.FunctionsIO;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -57,6 +59,16 @@ public class CreatingArrayTable extends JDialog {
         buttonCreateTable.addActionListener(
                 e -> {
                     int count = Integer.parseInt(textFieldCount.getText());
+                    if(count <= 1){
+                        buttonCreateFunction.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                // Включение в интерфейс иконки
+                                JOptionPane.showMessageDialog(CreatingArrayTable.this,
+                                        "Колличество точек должно быть больше 1",
+                                        "ЭТЭНШН ПЛИЗ", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        });
+                    }
                     for (int i = 0; i < count; i++) {
                         xValues.add(i, "");
                         yValues.add(i, "");

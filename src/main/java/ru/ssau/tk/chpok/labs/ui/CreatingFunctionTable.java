@@ -6,6 +6,8 @@ import ru.ssau.tk.chpok.labs.io.FunctionsIO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -68,6 +70,16 @@ public class CreatingFunctionTable extends JDialog {
                     double from = Double.parseDouble(textFieldFrom.getText());
                     double to = Double.parseDouble(textFieldTo.getText());
                     String str = comboBoxFunctions.getItemAt(comboBoxFunctions.getSelectedIndex());
+                    if(count <= 1){
+                        buttonCreateFunction.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                // Включение в интерфейс иконки
+                                JOptionPane.showMessageDialog(CreatingFunctionTable.this,
+                                        "Колличество точек должно быть больше 1",
+                                        "ЭТЭНШН ПЛИЗ", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        });
+                    }
                     if (str.equals("Константная функция")) {
                         String result = JOptionPane.showInputDialog("Введите значение константы");
                         double constant = Double.parseDouble(result);
