@@ -19,6 +19,7 @@ public class MainWindow extends JFrame {
     public final JButton arrayButton = new JButton("Массив");
     public final JButton functionButton = new JButton("Функция");
     public final JButton rickButton = new JButton("Rick Roll");
+    private final JButton calculatorButton = new JButton("Калькулятор");
 
     public MainWindow() throws URISyntaxException {
         super("Главное окно");
@@ -31,7 +32,6 @@ public class MainWindow extends JFrame {
         setBackground(Color.WHITE);
         setLocationRelativeTo(null);
         setVisible(true);
-
         setContentPane(createContentPane()); // передаем как параметр в коструктор
         setVisible(true); //  форма будет видимой
         addButtonListeners();
@@ -65,7 +65,7 @@ public class MainWindow extends JFrame {
             arraysItem.setSelected(false);
             linkedListItem.setSelected(true);
         }
-        if (getBackground() == Color.WHITE) {
+        if (getBackground() == (Color.WHITE)) {
             whiteMode.setSelected(true);
             darkMode.setSelected(false);
             pinkMode.setSelected(false);
@@ -171,9 +171,8 @@ public class MainWindow extends JFrame {
         totalGUI.setLayout(null);
 
         // Создадим ярлык (надпись) синего цвета
-        JLabel blueLabel = new JLabel("Здравствуйте, нажмите кнопку Создать, " +
-                "\n" + "чтобы создать новую таблицу");
-        blueLabel.setLocation(1, -40); /* надпись синего цвета*/
+        JLabel blueLabel = new JLabel("Добро пожаловать, добро пожаловать в программу 17");
+        blueLabel.setLocation(100, -40); /* надпись синего цвета*/
         blueLabel.setFont(new Font("Dialog", Font.ROMAN_BASELINE, 16));
         blueLabel.setSize(640, 100); // размер области надписи
         //blueLabel.setHorizontalAlignment(0);
@@ -215,6 +214,25 @@ public class MainWindow extends JFrame {
         rickButton.setActionCommand("Open");
         rickButton.addActionListener(new OpenUrlAction());
         totalGUI.add(rickButton); // добавляем кнопку на поверхность
+
+        // Создаём кнопку---------------
+        calculatorButton.setLocation(200, 200); // расположение кнопки
+        calculatorButton.setSize(200, 40); // размер кнопки
+        calculatorButton.setBackground(new Color(0x28A888));
+
+        class Calculator implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == calculatorButton) {
+                    WindowTabulatedFunctionOperationService windowTabulatedFunctionOperationService = new WindowTabulatedFunctionOperationService();
+                    windowTabulatedFunctionOperationService.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                    windowTabulatedFunctionOperationService.setVisible(true);
+                }
+            }
+        }
+        calculatorButton.setActionCommand("Open");
+        calculatorButton.addActionListener(new Calculator());
+        totalGUI.add(calculatorButton); // добавляем кнопку на поверхность
+
         totalGUI.setOpaque(true);
         return totalGUI; // возвращаем внешний вид
     }
@@ -248,6 +266,8 @@ public class MainWindow extends JFrame {
         });
 
     }
+
+
 
     public static void main(String[] args) throws URISyntaxException {
         MainWindow demo1 = new MainWindow(); // внешность формы

@@ -14,20 +14,19 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class CreatingFunctionTable extends JDialog {
-    //Count
+
     private final JLabel labelCount = new JLabel("Количество точек: ");
     private final JTextField textFieldCount = new JTextField(2);
-    //From - To
+
     private final JLabel labelInterval = new JLabel("Интервал: ");
     private final JLabel labelBracket1 = new JLabel("От");
-    // private final JLabel labelBracket3 = new JLabel(" ]");
     private final JLabel labelBracket2 = new JLabel("До");
     private final JTextField textFieldTo = new JTextField();
     private final JTextField textFieldFrom = new JTextField();
-    //TF
+
     private final JButton buttonCreateFunction = new JButton("Создать функцию");
     public TabulatedFunction function;
-    //
+
     Map<String, MathFunction> functionMap = new HashMap<>();
     JComboBox<String> comboBoxFunctions = showComboBox();
 
@@ -37,6 +36,11 @@ public class CreatingFunctionTable extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setBounds(100, 100, 640, 200);
+        setBackground(Color.DARK_GRAY);
+        buttonCreateFunction.setBackground(new Color(0x3A6C9E) );
+        textFieldCount.setBackground(new Color(0x4EA5B6) );
+        textFieldFrom.setBackground(new Color(0x4EA5B6) );
+        textFieldTo.setBackground(new Color(0x4EA5B6) );
         getContentPane().add(labelCount);
         getContentPane().add(textFieldCount);
 
@@ -123,7 +127,9 @@ public class CreatingFunctionTable extends JDialog {
         functionMap.put("Квадратичная функция", new SqrFunction());
         functionMap.put("Константная функция", new ConstantFunction(15));
         functionMap.put("Нулевая функция", new ZeroFunction());
+        functionMap.put("Синусоидальная функция", new SinFunction());
         functionMap.put("Тождественная функция", new IdentityFunction());
+
 
 
         DefaultComboBoxModel<String> functions = new DefaultComboBoxModel<>();
@@ -132,8 +138,7 @@ public class CreatingFunctionTable extends JDialog {
         functions.addElement("Квадратичная функция");
         functions.addElement("Константная функция");
         functions.addElement("Нулевая функция");
-        functions.addElement("Тождественная функция");
-        functions.addElement("Нулевая функция");
+        functions.addElement("Синусоидальная функция");
         functions.addElement("Тождественная функция");
 
         return new JComboBox<>(functions);

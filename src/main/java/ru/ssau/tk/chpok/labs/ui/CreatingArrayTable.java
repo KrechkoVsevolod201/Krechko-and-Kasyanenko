@@ -2,10 +2,14 @@ package ru.ssau.tk.chpok.labs.ui;
 
 import ru.ssau.tk.chpok.labs.functions.TabulatedFunction;
 import ru.ssau.tk.chpok.labs.functions.factory.ArrayTabulatedFunctionFactory;
+import ru.ssau.tk.chpok.labs.io.FunctionsIO;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -30,7 +34,10 @@ public class CreatingArrayTable extends JDialog {
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setModal(true);
         setBounds(100, 100, 640, 340);
-
+        setBackground(Color.DARK_GRAY);
+        buttonCreateFunction.setBackground(new Color(0x449E2D) );
+        buttonCreateTable.setBackground(new Color(0x478B97) );
+        tableXY.setBackground(new Color(0xD5D5D5) );
         getContentPane().add(labelCount);
         getContentPane().add(textFieldCount);
         getContentPane().add(buttonCreateTable);
@@ -70,8 +77,14 @@ public class CreatingArrayTable extends JDialog {
             dispose();
             System.out.println(function.toString());
 
+            try (BufferedWriter outArray = new BufferedWriter(new FileWriter("SavedFunction/array.txt"));) {
+                FunctionsIO.writeTabulatedFunction(outArray, function);
 
+            } catch (IOException err) {
+                err.printStackTrace();
+            }
         });
+
     }
 
 
