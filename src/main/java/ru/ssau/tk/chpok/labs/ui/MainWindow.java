@@ -179,6 +179,15 @@ public class MainWindow extends JFrame {
         blueLabel.setForeground(Color.blue); // задаём цвет
         totalGUI.add(blueLabel); // добавляем текстовую метку на поверхность
 
+        // Создадим ярлык (надпись) синего цвета
+        JLabel poweredLabel = new JLabel("Powered by CHPOK Labs");
+        poweredLabel.setLocation(480, 210); /* надпись синего цвета*/
+        poweredLabel.setFont(new Font("Dialog", Font.ROMAN_BASELINE, 12));
+        poweredLabel.setSize(640, 100); // размер области надписи
+        //blueLabel.setHorizontalAlignment(0);
+        poweredLabel.setForeground(Color.blue); // задаём цвет
+        totalGUI.add(poweredLabel); // добавляем текстовую метку на поверхность
+
         // Создаём кнопку---------------
         arrayButton.setLocation(300, 100); // расположение кнопки
         arrayButton.setSize(100, 40); // размер кнопки
