@@ -173,7 +173,7 @@ public class MainWindow extends JFrame {
         // Создадим ярлык (надпись) синего цвета
         JLabel blueLabel = new JLabel("Добро пожаловать, добро пожаловать в программу 17");
         blueLabel.setLocation(100, -40); /* надпись синего цвета*/
-        blueLabel.setFont(new Font("Dialog", Font.ROMAN_BASELINE, 16));
+        blueLabel.setFont(new Font("Dialog", Font.ROMAN_BASELINE, 17));
         blueLabel.setSize(640, 100); // размер области надписи
         //blueLabel.setHorizontalAlignment(0);
         blueLabel.setForeground(Color.blue); // задаём цвет

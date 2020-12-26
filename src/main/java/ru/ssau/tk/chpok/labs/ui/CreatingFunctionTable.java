@@ -37,10 +37,10 @@ public class CreatingFunctionTable extends JDialog {
         setModal(true);
         setBounds(100, 100, 640, 200);
         setBackground(Color.DARK_GRAY);
-        buttonCreateFunction.setBackground(new Color(0x3A6C9E) );
-        textFieldCount.setBackground(new Color(0x4EA5B6) );
-        textFieldFrom.setBackground(new Color(0x4EA5B6) );
-        textFieldTo.setBackground(new Color(0x4EA5B6) );
+        buttonCreateFunction.setBackground(new Color(0x39A0C2) );
+        textFieldCount.setBackground(new Color(0xB0DAEA) );
+        textFieldFrom.setBackground(new Color(0xB0DAEA) );
+        textFieldTo.setBackground(new Color(0xB0DAEA) );
         getContentPane().add(labelCount);
         getContentPane().add(textFieldCount);
 

@@ -344,6 +344,10 @@ public class WindowTabulatedFunctionOperationService extends JDialog {
         JScrollPane tableScrollPane2 = new JScrollPane(tableXY2);
         JScrollPane tableScrollPane3 = new JScrollPane(tableXY3);
 
+        tableScrollPane1.setBackground(Color.DARK_GRAY);
+        tableScrollPane2.setBackground(Color.DARK_GRAY);
+        tableScrollPane3.setBackground(Color.DARK_GRAY);
+
         tableScrollPane1.setPreferredSize(new Dimension(200, 320));
         tableScrollPane2.setPreferredSize(new Dimension(200, 320));
         tableScrollPane3.setPreferredSize(new Dimension(200, 320));
@@ -351,6 +355,21 @@ public class WindowTabulatedFunctionOperationService extends JDialog {
         tableXY1.setPreferredSize(new Dimension(200, 320));
         tableXY2.setPreferredSize(new Dimension(200, 320));
         tableXY3.setPreferredSize(new Dimension(200, 320));
+
+        jButtonPlus.setBackground(new Color(0x6AB410));
+        jButtonMultiply.setBackground(new Color(0x6AB410));
+        jButtonDivision.setBackground(new Color(0x6AB410));
+        jButtonDifference.setBackground(new Color(0x6AB410));
+        jButtonEquals.setBackground(new Color(0x6AB410));
+        jButtonSave.setBackground(new Color(0x10B49B));
+        jButtonSave1.setBackground(new Color(0x10B49B));
+        jButtonSave2.setBackground(new Color(0x10B49B));
+        jButtonCreateOfArray.setBackground(new Color(0x05BAE8));
+        jButtonCreateOfArray1.setBackground(new Color(0x05BAE8));
+        jButtonCreateOfFunction.setBackground(new Color(0x0066FF));
+        jButtonCreateOfFunction1.setBackground(new Color(0x0066FF));
+        jButtonDownland.setBackground(new Color(0xF3E70D));
+        jButtonDownland1.setBackground(new Color(0xF3E70D));
 
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
